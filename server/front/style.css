@@ -1,0 +1,96 @@
+.touche {
+    width: 9%;
+    height: 300px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+p {
+    color: white;
+    font-size: 75px;
+    text-align: center;
+}
+
+.white p {
+    color: black;
+}
+
+.white {
+    background-color: white;
+}
+
+.white:hover {
+    background: #AAAAAA;
+}
+
+.red {
+    background-color: red;
+}
+
+.red:hover {
+    background-color: #AA0000;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.orange:hover {
+    background-color: #C78F50;
+}
+
+.yellow {
+    background-color: gold;
+}
+
+.yellow:hover {
+    background-color: #FFFF00;
+}
+
+.green {
+    background-color: green;
+}
+
+.green:hover {
+    background-color: #00AA00;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.blue:hover {
+    background-color: #0000AA;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.purple:hover {
+    background-color: #BB00FF;
+}
+
+.pink {
+    background-color: pink;    
+}
+
+.pink:hover {
+    background-color: #F48C9F;
+}
+
+.brown {
+    background-color:brown;    
+}
+
+.brown:hover {
+    background-color: #732525;
+}
+
+.black {
+    background-color: black;    
+}
+
+.black:hover {
+    background-color: #444444;
+}
