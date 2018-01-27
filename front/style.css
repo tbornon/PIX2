@@ -1,0 +1,68 @@
+.menu {
+    display: inline-block;
+    width: 47%;
+    height: 150px;
+    border-radius: 15px;
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.menu.left {
+    left: 10px;
+    background: radial-gradient(#0068FF, #59A4E2);
+    box-shadow: 3px 3px 5px #80B4FF;
+}
+
+.menu.right {
+    right: 10px;
+    background: radial-gradient(#E12A2A, #CE5252);
+    box-shadow: 3px 3px 5px #D75A5A;
+}
+
+.menu p {
+    text-align: center;
+    margin-top: 33px;
+    font-size: 75px;
+    text-shadow: 1px 1px 5px #333333;
+    color: white;
+    font-style: bold;
+    font-family: 'VT323', monospace;    
+}
+
+.avatar {
+    position: absolute;
+    border-radius: 15px;
+    bottom: 15px;
+    left: 190px;
+    width: 100px;
+    height: 100px;
+}
+
+.avatar p {
+    text-align: center;
+}
+
+.parametres {
+    cursor: pointer;
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    border-radius: 15px;
+    bottom: 15px;
+    left: 10px;
+    background: radial-gradient(#DDDDDD, #EEEEEE);
+    box-shadow: 3px 3px 5px #999999;
+}
+
+.parametres img {
+    width: 50px;
+   height: 50px;
+   position: absolute;
+   left: 50%;
+   top: 50%; 
+   margin-left: -25px;
+   margin-top: -25px;
+}
