@@ -7,3 +7,4 @@ var userSchema = mongoose.Schema({
         gender: String
     }
 })
+
