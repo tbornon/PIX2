@@ -35,7 +35,7 @@ $(document).ready(function() {
         if(e.target.id == "male") $('.step2 #female').removeClass('selected')
         else if(e.target.id == "female") $('.step2 #male').removeClass('selected')
         showAvatar(avatarCounterSeed, gender);
-    })
+    });
 
 
 });
