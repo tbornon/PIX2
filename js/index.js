@@ -1,9 +1,11 @@
 var step = 1;
-var avatarCounterSeed = 0;
+var avatarCounterSeed = Math.random()*10;
 var gender = "male";
 
 $(document).ready(function() {
-    $('.step2').hide();
+    $('.step1').hide();
+    $('.step3').hide();
+    $('.next').addClass('blue');
     
     /* CHANGER L'ETAPE */   
     $(".next").on('click', function(e) {
@@ -11,17 +13,24 @@ $(document).ready(function() {
         $('.step' + ++step).show(function() {
             if(step == 2) showAvatar(avatarCounterSeed, "male")
         }); 
+    });
+
+    /* CHOISIR UNE COULEUR */
+    $(".pickColor").on('click', function(e) {
+        $('.pickColor').removeClass('selected');
+        $('.next').removeClass().addClass('next ' + e.target.id);
+        $(e.target).addClass('selected');
     })
 
     /* BOUTONS NAVIGATION POUR LE CHOIX DE L'AVATAR */
-    $('.step2 .navigation.right').on('click', function(e) {
-        if(avatarCounterSeed == 0) $('.step2 .navigation.left').removeClass('grayed');
+    $('.step3 .navigation.right').on('click', function(e) {
+        if(avatarCounterSeed == 0) $('.step3 .navigation.left').removeClass('grayed');
         avatarCounterSeed++;
         showAvatar(avatarCounterSeed, gender);
     });
 
-    $('.step2 .navigation.left').on('click', function(e) {
-        if(avatarCounterSeed == 1) $('.step2 .navigation.left').addClass('grayed');
+    $('.step3 .navigation.left').on('click', function(e) {
+        if(avatarCounterSeed == 1) $('.step3 .navigation.left').addClass('grayed');
         if(avatarCounterSeed != 0) {
         avatarCounterSeed--;
         showAvatar(avatarCounterSeed, gender);
@@ -29,11 +38,11 @@ $(document).ready(function() {
     });
 
     /* CHOIX DU GENRE DE L'AVATAR */
-    $('.step2 a').on('click', function(e) {
+    $('.step3 a').on('click', function(e) {
         $(e.target).addClass('selected')
         gender = e.target.id;
-        if(e.target.id == "male") $('.step2 #female').removeClass('selected')
-        else if(e.target.id == "female") $('.step2 #male').removeClass('selected')
+        if(e.target.id == "male") $('.step3 #female').removeClass('selected')
+        else if(e.target.id == "female") $('.step3 #male').removeClass('selected')
         showAvatar(avatarCounterSeed, gender);
     });
 

@@ -79,6 +79,24 @@
 }
 
 .step2 h1 {
+    text-align: center;
+}
+
+.step2 .pickColor {
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    margin-left: 9px;
+    margin-top: 50px;
+}
+
+.step2 .pickColor.selected {
+    border: 2px solid #888888;
+}
+
+.step3 h1 {
     font-size: 25px;
     font-style: bold;
     padding: 0px 10px 0px 10px;
@@ -86,7 +104,7 @@
     text-transform: uppercase;
 }
 
-.step2 img {
+.step3 img {
     width: 150px;
     height: 150px;
     user-select: none;
@@ -96,25 +114,25 @@
     margin: auto;
 }
 
-.step2 .navigation {
+.step3 .navigation {
     position: absolute;
     top: 80px;
     cursor: pointer;
 }
 
-.step2 p.navigation.grayed {
+.step3 p.navigation.grayed {
     color: #59A4E2;
 }
 
-.step2 .navigation.left {
+.step3 .navigation.left {
     left: 10px;
 }
 
-.step2 .navigation.right {
+.step3 .navigation.right {
     right: 10px;
 }
 
-.step2 p.navigation {    
+.step3 p.navigation {    
     font-size: 40px;
     color: #0068FF;
     text-shadow: 1px 1px 5px #80B4FF;
@@ -122,7 +140,7 @@
     -webkit-user-select: none; 
 }
 
-.step2 a {
+.step3 a {
     width: 49%;
     display: inline-block;
     text-align: center;
@@ -132,7 +150,7 @@
     cursor: pointer;
 }
 
-.step2 a.selected {
+.step3 a.selected {
     background: radial-gradient(#0068FF, #59A4E2);
     color: white;
     border-radius: 15px;
@@ -145,8 +163,8 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-    background: radial-gradient(#0068FF, #59A4E2);
-    box-shadow: 3px 3px 5px #80B4FF;
+    /*background: radial-gradient(#0068FF, #59A4E2);
+    box-shadow: 3px 3px 5px #80B4FF;*/
     cursor: pointer;
 }
 
@@ -158,4 +176,41 @@
     color: white;
     font-style: bold;
     font-family: 'VT323', monospace; 
+}
+
+/* COLORS */
+
+.blue {
+    background: radial-gradient(#0068FF, #59A4E2);
+    box-shadow: 3px 3px 5px #80B4FF;
+}
+
+.pink {
+    background: radial-gradient(#ff00aa, #f887d2);
+    box-shadow: 3px 3px 5px #ffa5df;
+}
+
+.red {    
+    background: radial-gradient(#E12A2A, rgb(235, 111, 111));
+    box-shadow: 3px 3px 5px #D75A5A;
+}
+
+.orange {
+    background: radial-gradient(rgb(250, 150, 0), rgb(233, 183, 75));
+    box-shadow: 3px 3px 5px rgb(223, 184, 126);
+}
+
+.yellow {
+    background: radial-gradient(yellow, rgb(255, 255, 171));
+    box-shadow: 3px 3px 5px rgb(231, 231, 147);
+}
+
+.green {
+    background: radial-gradient(rgb(9, 219, 9), rgb(112, 218, 126));
+    box-shadow: 3px 3px 5px rgb(142, 216, 148);
+}
+
+.black {
+    background: radial-gradient(black, #444444);
+    box-shadow: 3px 3px 5px #666666;
 }

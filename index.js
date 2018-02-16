@@ -1,10 +1,10 @@
 const http = require('http').createServer();
 const express = require('express');
 const app = express();
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 const io = require('socket.io')(http);
 
-mongoose.connect('mongodb://localhost/pix');
+/*mongoose.connect('mongodb://localhost/pix');
 
 var db = mongoose.connection;
 
@@ -12,7 +12,7 @@ db.on('error', console.error.bind(console, 'connection error:'))
 
 db.once('open', () => {
     console.log("Connected to database");
-})
+})*/
 
 
 
