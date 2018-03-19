@@ -3,9 +3,9 @@ var avatarCounterSeed = Math.random()*10;
 var gender = "male";
 
 $(document).ready(function() {
-    $('.step1').hide();
+    $('.step2').hide();
     $('.step3').hide();
-    $('.next').addClass('blue');
+    $('.colored').addClass('blue');
     
     /* CHANGER L'ETAPE */   
     $(".next").on('click', function(e) {
@@ -18,19 +18,17 @@ $(document).ready(function() {
     /* CHOISIR UNE COULEUR */
     $(".pickColor").on('click', function(e) {
         $('.pickColor').removeClass('selected');
-        $('.next').removeClass().addClass('next ' + e.target.id);
+        $('.colored').removeClass("blue pink red orange yellow green black").addClass(e.target.id);
         $(e.target).addClass('selected');
     })
 
     /* BOUTONS NAVIGATION POUR LE CHOIX DE L'AVATAR */
     $('.step3 .navigation.right').on('click', function(e) {
-        if(avatarCounterSeed == 0) $('.step3 .navigation.left').removeClass('grayed');
         avatarCounterSeed++;
         showAvatar(avatarCounterSeed, gender);
     });
 
     $('.step3 .navigation.left').on('click', function(e) {
-        if(avatarCounterSeed == 1) $('.step3 .navigation.left').addClass('grayed');
         if(avatarCounterSeed != 0) {
         avatarCounterSeed--;
         showAvatar(avatarCounterSeed, gender);
