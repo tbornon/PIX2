@@ -24,6 +24,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '\\menu.html');
 });
 
+app.get('/debug', (req, res) => {
+    res.sendFile(__dirname + '\\debug.html');
+});
+
 app.post('/save', (req, res) => {
 
 })
