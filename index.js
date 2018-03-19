@@ -28,15 +28,18 @@ app.get('/debug', (req, res) => {
     res.sendFile(__dirname + '\\debug.html');
 });
 
+app.get('/simon', (req, res) => {
+    res.sendFile(__dirname + '\\simon.html');
+});
+
 app.post('/save', (req, res) => {
 
 })
 
 io.on('connection', (socket) => {
     console.log("User connected");
-    socket.emit('news', "hello");
-
     socket.on('keypressed', (data) => {
+        socket.broadcast.emit('keypressed', data);
         console.log("Keypressed :", data);
     })
 });
