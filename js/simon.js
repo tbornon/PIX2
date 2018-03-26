@@ -19,22 +19,14 @@ var timer;
 var timerJeu;
 
 // Avancement du joueur 
-var indexJoueur = 0; 
+var indexJoueur = 0;
 
 // La fonction s'éxécute lorsque la page est chargée
 $(document).ready(function () {
     // Se connecte au serveur
+    $('#main').hide();
+    $('#score').hide();
     var socket = io('http://localhost:3000');
-
-    // on genère le timer qui vérifie si la partie est perdue toutes les 100ms
-    timerJeu = setInterval(function () {
-        if (perdu) {
-            // Affichage d'un message
-            alert("Tu as perdu");
-            // On arrête le timer
-            clearInterval(timerJeu);
-        }
-    }, 100);
 
     // focntion éxécutée lorsque le serveur envoie un message de type "keypressed"
     socket.on('keypressed', function (data) {
@@ -53,7 +45,7 @@ $(document).ready(function () {
                 perdu = true;
                 console.log("Mauvaise couleur")
             }
-            
+
             // Si le joueur a saisi correctement toute la séquence de couleurs
             if (indexJoueur == couleursAleatoires.length) {
                 // on remet l'index a 0
@@ -62,15 +54,38 @@ $(document).ready(function () {
                 jouer();
             }
         }
-    })
-    // on génère une nouvelle couleur et on affiche la séquence de couleurs
-    jouer();
+    });
+
+    // on genère le timer qui vérifie si la partie est perdue toutes les 100ms
+    timerJeu = setInterval(function () {
+        if (perdu) {
+            // Affichage d'un message
+            console.log("Tu as perdu");
+            alert("Tu as perdu");
+            // On arrête le timer
+            clearInterval(timerJeu);
+        }
+    }, 100);
+
+    $('#play').on('click', function () {
+        $('#main').show();
+        $('#score').show();
+        $('#play').hide();        
+
+        // on génère une nouvelle couleur et on affiche la séquence de couleurs
+        jouer();
+    });
+
+    $('#back').on('click', function() {
+        document.location.href="/";
+    });
 });
 
 function jouer() {
     // on genère une nouvelle couleur
     genererCouleur(listeCouleur, couleursAleatoires);
     // on affiche un message contenant l'étape du jeu
+    $('#score p').text("Score : " + couleursAleatoires.length);
     console.log("jouer(): étape " + couleursAleatoires.length);
     // on affiche la séquence de couleur
     afficherCouleurs(0);

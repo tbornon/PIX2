@@ -3,7 +3,7 @@
     height: 210px;
 
     margin-left:130px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 .bloc {
@@ -46,4 +46,33 @@
 
 .bloc.allume#yellow {
     background-color: #FFFF66;
+}
+
+#play {
+    margin-left: 155px;
+    margin-top: 85px;
+}
+
+#play img {
+    width: 150px;
+    height: 150px;
+}
+
+#back {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+#back img {    
+    width: 30px;
+    height: 30px;
+}
+
+#score p {
+    width: 460px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
 }
