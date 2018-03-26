@@ -1,72 +1,3 @@
-.menu {
-    display: inline-block;
-    width: 47%;
-    height: 150px;
-    border-radius: 15px;
-    cursor: pointer;
-    position: absolute;
-    top: 30px;
-    user-select: none;
-    -moz-user-select: none;
-}
-
-.menu.left {
-    left: 10px;
-    background: radial-gradient(#0068FF, #59A4E2);
-    box-shadow: 3px 3px 5px #80B4FF;
-}
-
-.menu.right {
-    right: 10px;
-    background: radial-gradient(#E12A2A, #CE5252);
-    box-shadow: 3px 3px 5px #D75A5A;
-}
-
-.menu p {
-    text-align: center;
-    margin-top: 33px;
-    font-size: 75px;
-    text-shadow: 1px 1px 5px #333333;
-    color: white;
-    font-style: bold;
-    font-family: 'VT323', monospace;    
-}
-
-.avatar {
-    position: absolute;
-    border-radius: 15px;
-    bottom: 15px;
-    left: 190px;
-    width: 100px;
-    height: 100px;
-}
-
-.avatar p {
-    text-align: center;
-}
-
-.parametres {
-    cursor: pointer;
-    width: 75px;
-    height: 75px;
-    position: absolute;
-    border-radius: 15px;
-    bottom: 15px;
-    left: 10px;
-    background: radial-gradient(#DDDDDD, #EEEEEE);
-    box-shadow: 3px 3px 5px #999999;
-}
-
-.parametres img {
-    width: 50px;
-   height: 50px;
-   position: absolute;
-   left: 50%;
-   top: 50%; 
-   margin-left: -25px;
-   margin-top: -25px;
-}
-
 .step1 {
     margin: auto;
 }
@@ -134,8 +65,8 @@
 
 .step3 p.navigation {    
     font-size: 40px;
-    color: #0068FF;
-    text-shadow: 1px 1px 5px #80B4FF;
+    /*color: #0068FF;
+    text-shadow: 1px 1px 5px #80B4FF;*/
     user-select: none;
     -webkit-user-select: none; 
 }
@@ -180,37 +111,79 @@
 
 /* COLORS */
 
-.blue {
+.blueBg {
     background: radial-gradient(#0068FF, #59A4E2);
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px #80B4FF;
 }
 
-.pink {
+.blueFg {
+    color: #0068FF;
+}
+
+.pinkBg {
     background: radial-gradient(#ff00aa, #f887d2);
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px #ffa5df;
 }
 
-.red {    
+.pinkFg {
+    color: #ff00aa;
+}
+
+.redBg {    
     background: radial-gradient(#E12A2A, rgb(235, 111, 111));
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px #D75A5A;
 }
 
-.orange {
+.redFg {
+    color: #E12A2A;
+}
+
+.orangeBg {
     background: radial-gradient(rgb(250, 150, 0), rgb(233, 183, 75));
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px rgb(223, 184, 126);
 }
 
-.yellow {
+.orangeFg {
+    color: rgb(250, 150, 0);
+}
+
+.yellowBg {
     background: radial-gradient(yellow, rgb(255, 255, 171));
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px rgb(231, 231, 147);
 }
 
-.green {
+.yellowFg {
+    color: yellow;
+}
+
+.greenBg {
     background: radial-gradient(rgb(9, 219, 9), rgb(112, 218, 126));
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px rgb(142, 216, 148);
 }
 
-.black {
+.greenFg {
+    color: rgb(9, 219, 9);
+}
+
+.blackBg {
     background: radial-gradient(black, #444444);
+    border-radius: 10px;
+    color: white !important;
     box-shadow: 3px 3px 5px #666666;
+}
+
+.blackFg {
+    color: black;
 }

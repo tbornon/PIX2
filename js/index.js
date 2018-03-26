@@ -1,11 +1,15 @@
 var step = 1;
 var avatarCounterSeed = Math.random()*10;
 var gender = "male";
+var foregrounds = "blueFg pinkFg redFg orangeFg yellowFg greenFg blackFg";
+var backgrounds = "blueBg pinkBg redBg orangeBg yellowBg greenBg blackBg";
+var selectedColor = "blue";
 
 $(document).ready(function() {
     $('.step2').hide();
     $('.step3').hide();
-    $('.colored').addClass('blue');
+    $('.coloredBg').addClass(selectedColor + "Bg");
+    $('.coloredFg').addClass(selectedColor + "Fg");
     
     /* CHANGER L'ETAPE */   
     $(".next").on('click', function(e) {
@@ -18,7 +22,9 @@ $(document).ready(function() {
     /* CHOISIR UNE COULEUR */
     $(".pickColor").on('click', function(e) {
         $('.pickColor').removeClass('selected');
-        $('.colored').removeClass("blue pink red orange yellow green black").addClass(e.target.id);
+        selectedColor = e.target.id;
+        $('.coloredBg').removeClass(backgrounds).addClass(selectedColor + "Bg");
+        $('.coloredFg').removeClass(foregrounds).addClass(selectedColor + "Fg");
         $(e.target).addClass('selected');
     })
 
@@ -37,10 +43,10 @@ $(document).ready(function() {
 
     /* CHOIX DU GENRE DE L'AVATAR */
     $('.step3 a').on('click', function(e) {
-        $(e.target).addClass('selected')
+        $(e.target).addClass(selectedColor + "Bg")
         gender = e.target.id;
-        if(e.target.id == "male") $('.step3 #female').removeClass('selected')
-        else if(e.target.id == "female") $('.step3 #male').removeClass('selected')
+        if(e.target.id == "male") $('.step3 #female').removeClass(backgrounds)
+        else if(e.target.id == "female") $('.step3 #male').removeClass(backgrounds)
         showAvatar(avatarCounterSeed, gender);
     });
 

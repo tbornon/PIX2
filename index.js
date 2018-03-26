@@ -21,6 +21,10 @@ app.use('/css', express.static('css'));
 app.use('/res', express.static('res'));
 
 app.get('/', (req, res) => {
+    res.sendFile(__dirname + '\\index.html');
+});
+
+app.get('/menu', (req, res) => {
     res.sendFile(__dirname + '\\menu.html');
 });
 
