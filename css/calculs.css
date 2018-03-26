@@ -1,8 +1,12 @@
 #main {
-    width: 380px;
-    height: 270px;
-
-    margin: auto;
-    background-color: aqua;
-
+    width: 300px;
+    height: 200px;
+    background-color: black;
+    opacity: 0.12;
+}
+#main p
+{
+    font-size:25px;
+    text-align: center;
+    height: 100%;
 }
