@@ -20,8 +20,16 @@ app.use('/js', express.static('js'));
 app.use('/css', express.static('css'));
 app.use('/res', express.static('res'));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '\\index.html');
+app.get('/config/welcome', (req, res) => {
+    res.sendFile(__dirname + '\\config\\welcome.html');
+});
+
+app.get('/config/colors', (req, res) => {
+    res.sendFile(__dirname + '\\config\\colors.html');
+});
+
+app.get('/config/avatar', (req, res) => {
+    res.sendFile(__dirname + '\\config\\avatar.html');
 });
 
 app.get('/menu', (req, res) => {

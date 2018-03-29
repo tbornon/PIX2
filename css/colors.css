@@ -1,0 +1,76 @@
+.blueBg {
+    background: radial-gradient(#0068FF, #59A4E2);
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px #80B4FF;
+}
+
+.blueFg {
+    color: #0068FF;
+}
+
+.pinkBg {
+    background: radial-gradient(#ff00aa, #f887d2);
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px #ffa5df;
+}
+
+.pinkFg {
+    color: #ff00aa;
+}
+
+.redBg {    
+    background: radial-gradient(#E12A2A, rgb(235, 111, 111));
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px #D75A5A;
+}
+
+.redFg {
+    color: #E12A2A;
+}
+
+.orangeBg {
+    background: radial-gradient(rgb(250, 150, 0), rgb(233, 183, 75));
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px rgb(223, 184, 126);
+}
+
+.orangeFg {
+    color: rgb(250, 150, 0);
+}
+
+.yellowBg {
+    background: radial-gradient(yellow, rgb(255, 255, 171));
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px rgb(231, 231, 147);
+}
+
+.yellowFg {
+    color: yellow;
+}
+
+.greenBg {
+    background: radial-gradient(rgb(9, 219, 9), rgb(112, 218, 126));
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px rgb(142, 216, 148);
+}
+
+.greenFg {
+    color: rgb(9, 219, 9);
+}
+
+.blackBg {
+    background: radial-gradient(black, #444444);
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px #666666;
+}
+
+.blackFg {
+    color: black;
+}

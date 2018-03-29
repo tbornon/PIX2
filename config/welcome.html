@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/VT323.css">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/config.css">
+    <script src="/js/jquery.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="welcome">
+        <h1>Bienvenue sur le
+            <br>Piano Magique</h1>
+
+        <div class="next blueBg">
+            <p>Suivant</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".next").on('click', function () {
+                document.location.href = "/config/colors"
+            })
+        })
+    </script>
+</body>
+
+</html>
