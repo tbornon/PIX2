@@ -2,6 +2,7 @@ var foregrounds = "blueFg pinkFg redFg orangeFg yellowFg greenFg blackFg";
 var backgrounds = "blueBg pinkBg redBg orangeBg yellowBg greenBg blackBg";
 var selectedColor = "blue";
 var colorLoaded = false;
+var colorChanged;
 
 $.ajax({
     url: '/api/color',
@@ -11,5 +12,6 @@ $.ajax({
         colorLoaded = true;
         $('.coloredBg').addClass(selectedColor + "Bg");
         $('.coloredFg').addClass(selectedColor + "Fg");
+        if(colorChanged) colorChanged();
     }
 })

@@ -32,7 +32,7 @@ app.use('/js', express.static('js'));
 app.use('/css', express.static('css'));
 app.use('/res', express.static('res'));
 
-app.all('^(?!.*api).*$', (req,res,next) => {
+app.all('(?!*api)*', (req,res,next) => {
     if(req.originalUrl != '/config/welcome' && req.originalUrl != '/config/colors' && req.originalUrl != '/config/avatar' && !isUserComplete()) {
         if(actualUser == null)
             res.writeHead(302, {'Location': '/config/welcome'})
@@ -41,8 +41,8 @@ app.all('^(?!.*api).*$', (req,res,next) => {
         else if(actualUser.avatar.seed == null)
             res.writeHead(302, {'Location': '/config/avatar'})
         res.end();
-    }
-    next();
+    } else
+        next();
 })
 
 app.get('/config/welcome', (req, res) => {
@@ -70,6 +70,18 @@ app.get('/config/avatar', (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '\\menu.html');
+});
+
+app.get('/parametres', (req,res) => {
+    res.sendFile(__dirname + "\\parametres.html");
+});
+
+app.get('/trophes', (req,res) => {
+    res.sendFile(__dirname + "\\trophes.html");
+});
+
+app.get('/choixJeu', (req,res) => {
+    res.sendFile(__dirname + "\\choixJeu.html");
 });
 
 app.get('/debug', (req, res) => {

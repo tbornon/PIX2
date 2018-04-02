@@ -36,9 +36,11 @@ $(document).ready(function () {
             type: "POST",
             data: { "gender": gender, "seed": avatarCounterSeed},
             success: function(data) {
-                if(data == "ok") {
-                    console.log("Data successfuly saved")
-                    //document.location.href="/";
+                if(data == "ok") {                    
+                    if(document.referrer == "http://localhost/parametres")
+                        document.location.href = "/";
+                    else
+                        document.location.href = "/";
                 } else {
                     console.error("Invalid answer : " + data);
                 }

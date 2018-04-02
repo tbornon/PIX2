@@ -1,0 +1,53 @@
+.button {
+    position: absolute;
+    width: 45%;
+    height: 100px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.button p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 23px;
+}
+
+.top {
+    top: 15px;
+}
+
+.bottom {
+    bottom: 75px;
+}
+
+.left {
+    left: 15px;
+}
+
+.right {
+    right: 15px;
+}
+
+.return {
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    bottom: 15px;
+    left: 170px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.return p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 1px;
+}

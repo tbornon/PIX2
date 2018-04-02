@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    console.log(document.referrer)
     $('.coloredBg').addClass(selectedColor + "Bg");
     $('.coloredFg').addClass(selectedColor + "Fg");
     $('.pickColor#' + selectedColor).addClass('selected');
@@ -19,11 +20,21 @@ $(document).ready(function () {
             data: { "color": selectedColor },
             success: function (data) {
                 if (data == "ok")
-                    document.location.href = "/config/avatar"
+                    if(document.referrer == "http://localhost/parametres")
+                        document.location.href = "/";
+                    else
+                        document.location.href = "/config/avatar";
                 else
                     console.error("Invalid answer : " + data);
             }
         })
 
-    })
+    });
+
+    colorChanged = function() {
+        $('.pickColor').removeClass('selected');
+        $('.coloredBg').removeClass(backgrounds).addClass(selectedColor + "Bg");
+        $('.coloredFg').removeClass(foregrounds).addClass(selectedColor + "Fg");
+        $('#' + selectedColor).addClass('selected');
+    }
 })
