@@ -100,6 +100,10 @@ app.post('/api/color', (req, res) => {
     })
 });
 
+app.get('/simon', (req, res) => {
+    res.sendFile(__dirname + '\\simon.html');
+});
+
 app.get('/api/color', (req, res) => {
     console.log("Returning actual user color : " + actualUser.color);
     res.json({ color: actualUser.color });
@@ -128,9 +132,8 @@ app.get('/api/avatar', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log("User connected");
-    socket.emit('news', "hello");
-
     socket.on('keypressed', (data) => {
+        socket.broadcast.emit('keypressed', data);
         console.log("Keypressed :", data);
     })
 });

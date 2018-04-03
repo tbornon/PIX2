@@ -1,0 +1,78 @@
+#main {
+    width: 210px;
+    height: 210px;
+
+    margin-left:130px;
+    margin-top: 30px;
+}
+
+.bloc {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+}
+
+.bloc#blue {
+    background-color: #0000FF;
+    border-radius: 0px 0px 100px 0px;
+}
+
+.bloc#red {
+    background-color: red;
+    border-radius: 0px 100px 0px 0px;
+}
+
+.bloc#yellow {
+    background-color: yellow;
+    border-radius: 0px 0px 0px 100px;
+}
+
+.bloc#green {
+    background-color: green;
+    border-radius: 100px 0px 0px 0px;
+}
+
+.bloc.allume#blue {
+    background-color: #0080FF;
+}
+
+.bloc.allume#red {
+    background-color: #FF6565;
+}
+
+.bloc.allume#green {
+    background-color: #66FF66;
+}
+
+.bloc.allume#yellow {
+    background-color: #FFFF66;
+}
+
+#play {
+    margin-left: 155px;
+    margin-top: 85px;
+}
+
+#play img {
+    width: 150px;
+    height: 150px;
+}
+
+#back {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+#back img {    
+    width: 30px;
+    height: 30px;
+}
+
+#score p {
+    width: 460px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+}
