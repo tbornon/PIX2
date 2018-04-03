@@ -64,9 +64,9 @@
     left: 25px;
 }
 
-#back img {    
-    width: 30px;
-    height: 30px;
+#back p {    
+    font-size: 40px;
+    margin-top: 0px;
 }
 
 #score p {
@@ -75,4 +75,24 @@
     font-size: 30px;
     font-weight: bold;
     margin-top: 15px;
+}
+
+.retour {
+    width: 20%;
+    height: 40px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.retour p {
+    font-size: 30px;
+    margin-top: 0px;
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
 }

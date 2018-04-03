@@ -10,6 +10,10 @@ $(document).ready(function() {
     $(".parametres").on('click', function() {
         document.location.href = "/parametres";
     });
+
+    $("#solo").on('click', function() {
+        document.location.href = "/choixJeu";
+    })
 })
 
 function showAvatar(seed, gender) {

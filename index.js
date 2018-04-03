@@ -4,7 +4,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const io = require('socket.io')(http);
-const User = require('./models/User')
+const User = require('./models/User');
+const Score = require('./models/Score');
 
 var actualUser;
 
@@ -22,7 +23,7 @@ db.once('open', () => {
             actualUser = res;
             console.log("Main user successfuly loaded");
         } else console.log("No main user detected");
-    })
+    });
 })
 
 
@@ -32,14 +33,14 @@ app.use('/js', express.static('js'));
 app.use('/css', express.static('css'));
 app.use('/res', express.static('res'));
 
-app.all('(?!*api)*', (req,res,next) => {
-    if(req.originalUrl != '/config/welcome' && req.originalUrl != '/config/colors' && req.originalUrl != '/config/avatar' && !isUserComplete()) {
-        if(actualUser == null)
-            res.writeHead(302, {'Location': '/config/welcome'})
-        else if(actualUser.color == null) 
-            res.writeHead(302, {'Location': '/config/colors'})
-        else if(actualUser.avatar.seed == null)
-            res.writeHead(302, {'Location': '/config/avatar'})
+app.all('(?!*api)*', (req, res, next) => {
+    if (req.originalUrl != '/config/welcome' && req.originalUrl != '/config/colors' && req.originalUrl != '/config/avatar' && !isUserComplete()) {
+        if (actualUser == null)
+            res.writeHead(302, { 'Location': '/config/welcome' })
+        else if (actualUser.color == null)
+            res.writeHead(302, { 'Location': '/config/colors' })
+        else if (actualUser.avatar.seed == null)
+            res.writeHead(302, { 'Location': '/config/avatar' })
         res.end();
     } else
         next();
@@ -72,15 +73,15 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '\\menu.html');
 });
 
-app.get('/parametres', (req,res) => {
+app.get('/parametres', (req, res) => {
     res.sendFile(__dirname + "\\parametres.html");
 });
 
-app.get('/trophes', (req,res) => {
+app.get('/trophes', (req, res) => {
     res.sendFile(__dirname + "\\trophes.html");
 });
 
-app.get('/choixJeu', (req,res) => {
+app.get('/choixJeu', (req, res) => {
     res.sendFile(__dirname + "\\choixJeu.html");
 });
 
@@ -130,6 +131,55 @@ app.get('/api/avatar', (req, res) => {
     });
 });
 
+app.get('/api/score/:game/:number', (req, res) => {
+    Score.findMax(req.params.game.toLowerCase(), req.params.number, (err, data) => {
+        if (err) {
+            res.send(err);
+            throw err;
+        } else {
+            res.json(data);
+        }
+    });
+});
+
+app.post('/api/score', (req, res) => {
+    let score = new Score();
+    score.userId = actualUser._id;
+    score.game = req.body.game.toLowerCase();
+    score.score = req.body.score;
+    score.save((err) => {
+        if(err) {
+            res.send(err);
+            throw err;
+        }
+        else {
+            res.send('ok');
+        }
+    });
+});
+
+app.get('/api/user/:id', (req, res) => {
+    User.findOne({_id: req.params.id}, (err, data) => {
+        if(err) {
+            res.send(err);
+            throw err;
+        } else {
+            res.json(data);
+        }
+    })
+});
+
+app.get('/api/user', (req, res) => {
+    User.findOne({mainUser: true}, (err, data) => {
+        if(err) {
+            res.send(err);
+            throw err;
+        } else {
+            res.json(data);
+        }
+    })
+});
+
 io.on('connection', (socket) => {
     console.log("User connected");
     socket.on('keypressed', (data) => {
@@ -147,8 +197,8 @@ http.listen(3000, () => {
 });
 
 function isUserComplete() {
-    if(actualUser == null) return false;
-    else if(actualUser.color == null) return false;
-    else if(actualUser.avatar.seed == null) return false;
+    if (actualUser == null) return false;
+    else if (actualUser.color == null) return false;
+    else if (actualUser.avatar.seed == null) return false;
     else return true;
 }

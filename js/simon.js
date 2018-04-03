@@ -21,6 +21,8 @@ var timerJeu;
 // Avancement du joueur 
 var indexJoueur = 0;
 
+var bestScore;
+
 // La fonction s'éxécute lorsque la page est chargée
 $(document).ready(function () {
     // Se connecte au serveur
@@ -59,9 +61,7 @@ $(document).ready(function () {
     // on genère le timer qui vérifie si la partie est perdue toutes les 100ms
     timerJeu = setInterval(function () {
         if (perdu) {
-            // Affichage d'un message
-            console.log("Tu as perdu");
-            alert("Tu as perdu");
+            finPartie();            
             // On arrête le timer
             clearInterval(timerJeu);
         }
@@ -76,9 +76,16 @@ $(document).ready(function () {
         jouer();
     });
 
-    $('#back').on('click', function() {
+    $('.retour').on('click', function() {
         document.location.href="/";
     });
+
+    $.ajax({
+        url: '/api/score/simon/1',
+        success: function(data) {
+            bestScore = data;
+        }
+    })
 });
 
 function jouer() {
@@ -91,6 +98,30 @@ function jouer() {
     afficherCouleurs(0);
 }
 
+function finPartie() {
+    let data = {
+        score: couleursAleatoires.length,
+        game: 'simon'
+    }
+    $.ajax({
+        url: "/api/score",
+        type: 'POST',
+        data: data,
+        success: function(data) {
+            if(data == "ok") console.log("saved");
+            else console.error("err : " + data);
+        }
+    });
+
+    $('#main').hide();
+    $('#back').hide();
+
+    if(bestScore.score > data.score) {
+
+    } else {
+
+    }
+}
 
 function afficherCouleurs(index) {
     // on empêche le joueur d'appuyer sur les touches
