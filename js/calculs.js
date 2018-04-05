@@ -16,6 +16,7 @@ $(document).ready(function() {
             chiffre1=chiffre2
             chiffre2=tampon}
         $("#main p").text(chiffre1+" "+operateur+" "+chiffre2+" = "+ " ? ");
+        
 })
 
 function getRandomIntInclusive(min, max) {
