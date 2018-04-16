@@ -105,6 +105,10 @@ app.get('/simon', (req, res) => {
     res.sendFile(__dirname + '\\simon.html');
 });
 
+app.get('/couleur', (req,res) => {
+    res.sendFile(__dirname + '\\couleur.html');
+});
+
 app.get('/api/color', (req, res) => {
     console.log("Returning actual user color : " + actualUser.color);
     res.json({ color: actualUser.color });
