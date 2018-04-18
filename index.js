@@ -69,6 +69,10 @@ app.get('/config/avatar', (req, res) => {
     res.sendFile(__dirname + '\\config\\avatar.html');
 });
 
+app.get('/config/pseudo', (req, res) => {
+    res.sendFile(__dirname + '\\config\\pseudo.html');
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '\\menu.html');
 });
