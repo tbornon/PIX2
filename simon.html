@@ -8,7 +8,8 @@
     <script src="/js/loadColor.js" type="text/javascript"></script>
     <script src="/js/simon.js" type="text/javascript"></script>
 
-    <link rel="stylesheet" href="css/VT323.css">    
+    <link rel="stylesheet" href="/css/noOverflow.css">
+    <link rel="stylesheet" href="/css/VT323.css">    
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/simon.css">
     <title>Simon</title>
@@ -26,11 +27,14 @@
         <div class="bloc" id="yellow"></div>
         <div class="bloc" id="blue"></div>
     </div>
-    <div id="score">
+    <div class="coloredBg" id="score">
         <p>Score : 0</p>
     </div>
     <div class="blackBg retour">
         <p>Retour</p>
     </div>
+
+    <div class="large button coloredBg" id="yourScore"><p>Votre score :</p></div>
+    <div class="large button coloredBg" id="bestScore"><p>Meilleur score :</p></div>
 </body>
 </html>

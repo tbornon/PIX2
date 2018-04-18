@@ -20,7 +20,7 @@ $(document).ready(function () {
             data: { "color": selectedColor },
             success: function (data) {
                 if (data == "ok")
-                    if(document.referrer == "http://localhost/parametres")
+                    if(document.referrer == "http://" + document.location.host + "/parametres")
                         document.location.href = "/";
                     else
                         document.location.href = "/config/avatar";

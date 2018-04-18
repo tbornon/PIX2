@@ -1,0 +1,6 @@
+body {
+    overflow: hidden;
+    cursor: none;
+    user-select: none;
+    -moz-user-select: none;
+}

@@ -3,7 +3,7 @@
     width: 47%;
     height: 150px;
     border-radius: 15px;
-    cursor: pointer;
+    /*cursor: pointer;*/
     user-select: none;
     -moz-user-select: none;
     position: absolute;
@@ -50,7 +50,7 @@
 }
 
 .parametres {
-    cursor: pointer;
+    /*cursor: pointer;*/
     width: 75px;
     height: 75px;
     position: absolute;
@@ -70,14 +70,15 @@
 }
 
 .parametres p {
-    margin-top: 10px;
-    margin-left: 12px;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .trophes {
-    cursor: pointer;
+    /*cursor: pointer;*/
     width: 75px;
     height: 75px;
     position: absolute;
@@ -97,7 +98,9 @@
 }
 
 .trophes p {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
     font-size: 40px;
-    margin-top: 10px;
-    margin-left: 13px;
 }

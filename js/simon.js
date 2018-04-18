@@ -22,13 +22,16 @@ var timerJeu;
 var indexJoueur = 0;
 
 var bestScore;
+var bestScoreUser;
 
 // La fonction s'éxécute lorsque la page est chargée
 $(document).ready(function () {
     // Se connecte au serveur
     $('#main').hide();
     $('#score').hide();
-    var socket = io('http://localhost:3000');
+    $('#yourScore').hide();
+    $('#bestScore').hide();
+    var socket = io('http://' + document.location.host + ':3000');
 
     // focntion éxécutée lorsque le serveur envoie un message de type "keypressed"
     socket.on('keypressed', function (data) {
@@ -61,31 +64,37 @@ $(document).ready(function () {
     // on genère le timer qui vérifie si la partie est perdue toutes les 100ms
     timerJeu = setInterval(function () {
         if (perdu) {
-            finPartie();            
             // On arrête le timer
             clearInterval(timerJeu);
+            finPartie();
         }
     }, 100);
 
     $('#play').on('click', function () {
         $('#main').show();
         $('#score').show();
-        $('#play').hide();        
+        $('#play').hide();
 
         // on génère une nouvelle couleur et on affiche la séquence de couleurs
-        jouer();
+        setTimeout(function () { jouer() }, 500);
     });
 
-    $('.retour').on('click', function() {
-        document.location.href="/";
+    $('.retour').on('click', function () {
+        document.location.href = "/";
     });
 
     $.ajax({
         url: '/api/score/simon/1',
-        success: function(data) {
-            bestScore = data;
+        success: function (data) {
+            bestScore = data[0];
+            $.ajax({
+                url: '/api/user/' + bestScore.userId,
+                success: function (user) {
+                    bestScoreUser = user;
+                }
+            });
         }
-    })
+    });
 });
 
 function jouer() {
@@ -107,19 +116,25 @@ function finPartie() {
         url: "/api/score",
         type: 'POST',
         data: data,
-        success: function(data) {
-            if(data == "ok") console.log("saved");
+        success: function (data) {
+            if (data == "ok") console.log("saved");
             else console.error("err : " + data);
         }
     });
 
     $('#main').hide();
     $('#back').hide();
+    $('#score').hide();
 
-    if(bestScore.score > data.score) {
+    $('#yourScore').show();
+    $('#bestScore').show();
 
+    if (bestScore != undefined && bestScore.score > data.score) {
+        $('#yourScore p').text("Votre score : " + couleursAleatoires.length);
+        $('#bestScore p').text("Meilleur score : " + bestScore.score);
     } else {
-
+        $('#yourScore p').text("Votre score : " + couleursAleatoires.length);
+        $('#bestScore p').text("Meilleur score : " + couleursAleatoires.length);
     }
 }
 
@@ -132,11 +147,11 @@ function afficherCouleurs(index) {
     // on récupère la position de la couleur dans le tableau listeCouleur
     var indexCouleur = listeCouleur.indexOf(couleursAleatoires[index]);
     // on ajoute la class allume à la couleur position indexCouleur
-    $(".bloc#" + listeCouleur[indexCouleur]).addClass("allume");
+    $(".bloc#" + listeCouleur[indexCouleur]).css('opacity', '0.3');
     // au bout de 500ms
     setTimeout(function () {
         // on enlève la class allume à tous les éléments de class bloc
-        $(".bloc").removeClass("allume");
+        $(".bloc").css('opacity', '1');
         // au bout de de 100ms
         setTimeout(function () {
             // si on ne sort pas du tableau <=> si il reste des couleurs à afficher
