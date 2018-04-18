@@ -1,0 +1,60 @@
+.game {
+    width: 24%;
+    height: 40px;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    opacity: 0.5;
+}
+
+.game p {
+    font-size: 30px;
+    margin-top: 0px;
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+}
+
+.selected {
+    opacity: 1;
+}
+
+#score {
+    width: 100%;
+
+}
+
+#score td {
+    text-align: center;
+}
+#score table tr:nth-child(even) {
+    background-color: #eee;
+}
+#score table tr:nth-child(odd) {
+    background-color: #fff;
+}
+#score table th {
+    background-color: #fff;
+}
+
+.return {
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.return p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 1px;
+}

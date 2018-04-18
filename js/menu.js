@@ -1,17 +1,21 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajax({
         url: "/api/avatar",
-        success: function(data) {
+        success: function (data) {
             console.log(data);
             showAvatar(data.seed, data.gender);
         }
     });
 
-    $(".parametres").on('click', function() {
+    $(".parametres").on('click', function () {
         document.location.href = "/parametres";
     });
 
-    $("#solo").on('click', function() {
+    $('.trophes').on('click', function () {
+        document.location.href = "/trophes";
+    });
+
+    $("#solo").on('click', function () {
         document.location.href = "/choixJeu";
     })
 })
@@ -24,7 +28,7 @@ function showAvatar(seed, gender) {
         avatars = new Avatars(Avatars.SPRITE_SETS.male); // male, female, identicon
 
     avatars.create(seed, { size: 200 }, function (err, canvas) {
-        if(err) console.error(err);
+        if (err) console.error(err);
         $('#avatarImg').attr('src', canvas.toDataURL());
     });
 }
