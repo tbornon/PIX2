@@ -4,6 +4,7 @@ var peutAppuyer = false;
 var perdu = false;
 var timer;
 var chiffre1, chiffre2;
+var nombreattendu
 //à mettre ds boucles var chiffre1 = getRandomIntInclusive(0,9);
 //à mettre ds boucles var chiffre2= getRandomIntInclusive(0,9);
 var operateur;
@@ -15,9 +16,41 @@ $(document).ready(function() {
         { var tampon=chiffre1
             chiffre1=chiffre2
             chiffre2=tampon}
+        console.log("Bonjour tanguy");    
+        if(operateur=="+")
+        {
+            nombreattendu=chiffre1+chiffre2
+        }
+        else if(operateur=="*")
+        {
+            nombreattendu=chiffre1*chiffre2
+        }
+        else if(operateur=="-")
+        {
+            nombreattendu=chiffre1-chiffre2
+        }
+        console.log("Nombre attendu est : "+nombreattendu);
+        var socket=io('http://localhost:3000');
         $("#main p").text(chiffre1+" "+operateur+" "+chiffre2+" = "+ " ? ");
+        socket.on('keypressed',function(data){
+            console.log("data:",data)
+            if(nombreattendu<10)
+            {
+                if(nombreattendu==data.number)
+                {
+                    Console.log("Bien joué")
+                }
+                else{Console.Log("Mauvaise réponse")}
+            }
+            else
+            {
+                var premierchiffre=data.number*10;
+            }
+
+        });
+
         
-})
+    });
 
 function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min +1)) + min;
