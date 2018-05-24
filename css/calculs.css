@@ -16,3 +16,21 @@
     font-style: bold;
     font-family: 'VT323', monospace; 
 }
+#back {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+#back img {    
+    width: 30px;
+    height: 30px;
+}
+
+#score p {
+    width: 460px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+}
