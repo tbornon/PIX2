@@ -21,3 +21,8 @@
     width: 100%;
     text-align: center;
 }
+
+#tableau{
+    background-color: blue;
+    background-size: 200px 100px;
+}
