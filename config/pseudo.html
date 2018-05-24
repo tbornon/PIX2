@@ -29,6 +29,7 @@
 
             display: {
                 'bksp': "\u2190",
+                'enter': "Valider"
             },
 
             layout: 'custom',
@@ -47,11 +48,15 @@
             buildKey: function (keyboard, data) {
                 console.log(data);
                 return data;
-            } 
+            }
 
         });
 
         $('#ipad').getkeyboard().reveal();
+
+        $.keyboard.keyaction.enter = function (base) {
+            console.log($("textarea").val());
+        };
     </script>
 </body>
 
