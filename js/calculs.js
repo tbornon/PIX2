@@ -5,6 +5,7 @@ var perdu = false;
 var timer;
 var chiffre1, chiffre2;
 var nombreattendu
+var resultat=""
 //à mettre ds boucles var chiffre1 = getRandomIntInclusive(0,9);
 //à mettre ds boucles var chiffre2= getRandomIntInclusive(0,9);
 var operateur;
@@ -34,18 +35,18 @@ $(document).ready(function() {
         $("#main p").text(chiffre1+" "+operateur+" "+chiffre2+" = "+ " ? ");
         socket.on('keypressed',function(data){
             console.log("data:",data)
-            if(nombreattendu<10)
+            resultat+=data.number
+            if(resultat.length==nombreattendu.tostring().length)
             {
-                if(nombreattendu==data.number)
+                if(resultat==nombreattendu)
                 {
-                    Console.log("Bien joué")
+                    console.log("LE resultat donné est :"+resultat);
+                    console.log("Bien joué")
+                    resultat="";
                 }
-                else{Console.Log("Mauvaise réponse")}
+                else{console.log("perdu")}
             }
-            else
-            {
-                var premierchiffre=data.number*10;
-            }
+            
 
         });
 
