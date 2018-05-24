@@ -110,7 +110,6 @@ app.get('/simon', (req, res) => {
 });
 
 app.get('/api/color', (req, res) => {
-    console.log("Returning actual user color : " + actualUser.color);
     res.json({ color: actualUser.color });
 });
 
