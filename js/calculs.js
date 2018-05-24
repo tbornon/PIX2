@@ -16,8 +16,7 @@ $(document).ready(function() {
         if(chiffre1<chiffre2 && operateur=="-")
         { var tampon=chiffre1
             chiffre1=chiffre2
-            chiffre2=tampon}
-        console.log("Bonjour tanguy");    
+            chiffre2=tampon}  
         if(operateur=="+")
         {
             nombreattendu=chiffre1+chiffre2

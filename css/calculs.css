@@ -16,17 +16,23 @@
     font-style: bold;
     font-family: 'VT323', monospace; 
 }
-#back {
+.blackBg {
+    background: radial-gradient(black, #444444);
+    border-radius: 10px;
+    color: white !important;
+    box-shadow: 3px 3px 5px #666666;
+}
+.return {
     position: absolute;
-    top: 25px;
-    left: 25px;
+    text-align: center;
+    width: 130px;
+    height: 40px;
+    bottom: 15px;
+    left: 15px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
 }
-
-#back img {    
-    width: 30px;
-    height: 30px;
-}
-
 #score p {
     width: 460px;
     text-align: center;
