@@ -30,10 +30,26 @@
         <p>Retour</p>
     </div>
 
-    <div class = "tableau">
-        <div id = "tabRang"></div>
-        <div id = "tabPseudo"></div>
-        <div id = "tabScore"></div>
+    <div class="tableau">
+        <button id="boutonSimon" class="lienOnglet" onclick="ouvrirOnglet(event, 'Simon')">Simon</button>
+        <button class="lienOnglet" onclick="ouvrirOnglet(event, 'Couleur')">Couleur</button>
+        <button class="lienOnglet" onclick="ouvrirOnglet(event, 'Calcul')">Calcul</button>
     </div>
+    
+    <div id="Simon" class="contenuOnglet">
+        <h3>London</h3>
+        <p>London is the capital city of England.</p>
+    </div>
+    
+    <div id="Couleur" class="contenuOnglet">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p> 
+    </div>
+    
+    <div id="Calcul" class="contenuOnglet">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+
 </body>
 </html>
