@@ -26,35 +26,38 @@
 
 .amis{
     text-align: right;
-    position: absolute;
-    top: 5px;
+    position: relative;
+    margin: 5px;
     right: 5px;
+    display: inline-block;
+}
+
+#pseudo{
+    display: inline-block;
+    margin: 5px;
 }
 
 #pseudo p{ 
-    margin: 0px;
-position: absolute;
-top: 5px;
-left: 60px;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
 }
 
 #avatar{
     width: 50px;
     height: 50px;
-    position: absolute;
-    top: 5px;
-    left: 5px;
+    position: relative;
+    margin: 5px;
     background-color: black;
+    display: inline-block;
 }
 
-
-.tableau {
+.onglets {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
 
-.tableau button {
+.onglets button {
     background-color: inherit;
     float: left;
     border: none;
@@ -64,11 +67,11 @@ left: 60px;
     transition: 0.3s;
 }
 
-.tableau button:hover {
+.onglets button:hover {
     background-color: #ddd;
 }
 
-.tableau button.active {
+.onglets button.active {
     background-color: #ccc;
 }
 
