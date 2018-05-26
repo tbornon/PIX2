@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <!-- jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/js/jquery.js"></script>
 
     <!-- jQuery UI theme or Bootstrap (optional, if you create a custom theme) -->
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-    
-    <!-- jQuery UI position utility (optional, if you position the keyboard yourself) -->
-    
-    <!-- keyboard widget css & script -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/virtual-keyboard/1.28.1/css/keyboard.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/virtual-keyboard/1.28.1/js/jquery.keyboard.js"></script>
+    <link href="/js/jquery-ui.css" rel="stylesheet">
+    <link href="/css/keyboard.css" rel="stylesheet">
+    <script src="/js/jquery.keyboard.js"></script>
 
-    <!-- css for the preview keyset extension -->
-    
-    <!-- keyboard optional extensions - include ALL (includes mousewheel) -->
+    <style>
+        textarea {
+            resize: none;
+            width: 460px;
+            height: 183px;
+        }
+    </style>
+
     <title>Document</title>
 </head>
 
@@ -28,10 +29,7 @@
 
             display: {
                 'bksp': "\u2190",
-                'accept': 'return',
-                'normal': 'ABC',
-                'meta1': '.?123',
-                'meta2': '#+='
+                'enter': "Valider"
             },
 
             layout: 'custom',
@@ -46,11 +44,19 @@
                     'Q S D F G H J K L M {enter}',
                     '{s} W X C V B N {s}'
                 ]
+            },
+            buildKey: function (keyboard, data) {
+                console.log(data);
+                return data;
             }
 
         });
 
         $('#ipad').getkeyboard().reveal();
+
+        $.keyboard.keyaction.enter = function (base) {
+            console.log($("textarea").val());
+        };
     </script>
 </body>
 
