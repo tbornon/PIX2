@@ -18,13 +18,17 @@ var compteur = 0
 //à mettre ds boucles var chiffre2= getRandomIntInclusive(0,9);
 var operateur;
 
+    
 // lorsque la page est chargée
 $(document).ready(function () {
+
     // Connexion à la websocket pour récupérer les infos du clavier
     var socket = io('http://localhost:3000');
-
+    $('#perdu').hide;
     // Génère les chiffres, l'opération et le résultat attendu
     genererPartie();
+    $('#main').show;
+    $('#perdu').show;
 
     // Lorsque l'on appuie sur une touche du clavier
     socket.on('keypressed', function (data) {
