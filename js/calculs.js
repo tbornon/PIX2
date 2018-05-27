@@ -24,12 +24,10 @@ $(document).ready(function () {
 
     // Connexion à la websocket pour récupérer les infos du clavier
     var socket = io('http://localhost:3000');
-    $('#perdu').hide;
     // Génère les chiffres, l'opération et le résultat attendu
     genererPartie();
-    $('#main').show;
-    $('#perdu').show;
-
+    $('#perdu').hide();
+    
     // Lorsque l'on appuie sur une touche du clavier
     socket.on('keypressed', function (data) {
         if (!perdu) {
@@ -107,5 +105,16 @@ function genererPartie() {
 }
 
 function perdu() {
-    
+    $('#main').hide();
+    $('#score').hide();
+    $('.return').hide();
+    $('#perdu').show();
+    $('#perdu p').text("Vous avez perdu"+"Score :"+compteur)
+    $('#retour').on('click', function () {
+        document.location.href = "/";
+    });
+    $('#play').on('click', function () {
+        console.log("Relance une partie");
+        return;
+    });
 }

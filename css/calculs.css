@@ -20,11 +20,44 @@
     width: 47%;
     height: 150px;
     background: radial-gradient(black, rgb(90, 90, 90));
+    margin: auto;
+    margin-top: 80px;
+    position: relative;
 }
 .perdu p{
     font-style: bold;
     font-family: 'VT323', monospace;
-    color :black;
+    color :white;
+    margin: auto;
+    margin-top: 20px;
+    left: 30px;
+    position: absolute
+}
+#retour{
+    width: 100px;
+    height: 40px;
+    bottom: 15px;
+    left: 15px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    font-style: bold;
+    font-family: 'VT323', monospace;
+    position: absolute;
+}
+#play{
+    width: 100px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    font-style: bold;
+    font-family: 'VT323', monospace;
+    position: absolute;
 }
 .blackBg {
     background: radial-gradient(black, #444444);
