@@ -32,6 +32,8 @@
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
+    font-style: bold;
+    font-family: 'VT323', monospace;
 }
 #score p {
     width: 460px;
