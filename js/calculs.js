@@ -103,5 +103,5 @@ function genererPartie() {
 }
 
 function perdu() {
-    // A faire
+    
 }
