@@ -46,7 +46,9 @@ $(document).ready(function() {
                     $('#score p').text("Score : " + compteur);
                     resultat="";
                 }
-                else{console.log("perdu")}
+                else{console.log("perdu");
+                $('#score p').text("Score : " + 0);
+                compteur=0;}
             }
         });
         $('#return blackBg').on('click', function() {
