@@ -4,6 +4,10 @@ $(document).ready(function() {
     });
 
     $('#simon').on('click', function() {
-        document.location.href = "/simon"
+        document.location.href = "/simon/";
+    });
+
+    $('#couleur').on('click', function() {
+        document.location.href = "/couleur/";
     });
 })

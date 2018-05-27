@@ -105,8 +105,12 @@ app.post('/api/color', (req, res) => {
     })
 });
 
-app.get('/simon', (req, res) => {
+app.get('/simon/*', (req, res) => {
     res.sendFile(__dirname + '\\simon.html');
+});
+
+app.get('/couleur/*', (req,res) => {
+    res.sendFile(__dirname + '\\couleur.html');
 });
 
 app.get('/api/color', (req, res) => {

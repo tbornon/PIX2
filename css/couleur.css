@@ -1,0 +1,52 @@
+h1 {
+    width: 100%;
+    text-align: center;
+}
+
+#affichage {
+    width: 100%;
+    text-align: center;    
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    font-size: 50px;
+}
+
+#score {
+    width: 70%;
+    height: 40px;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+#score p {
+    font-size: 30px;
+    margin-top: 0px;
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+}
+
+.retour {
+    width: 20%;
+    height: 40px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.retour p {
+    font-size: 30px;
+    margin-top: 0px;
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+}
