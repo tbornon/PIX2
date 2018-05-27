@@ -6,6 +6,7 @@ var timer;
 var chiffre1, chiffre2;
 var nombreattendu
 var resultat=""
+var compteur=0
 //à mettre ds boucles var chiffre1 = getRandomIntInclusive(0,9);
 //à mettre ds boucles var chiffre2= getRandomIntInclusive(0,9);
 var operateur;
@@ -41,14 +42,14 @@ $(document).ready(function() {
                 {
                     console.log("LE resultat donné est :"+resultat);
                     console.log("Bien joué")
+                    compteur++;
+                    $('#score p').text("Score : " + compteur);
                     resultat="";
                 }
                 else{console.log("perdu")}
             }
-            
-
         });
-        $('#back').on('click', function() {
+        $('#return blackBg').on('click', function() {
             document.location.href="/";
         });
 
