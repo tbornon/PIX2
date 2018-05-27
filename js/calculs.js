@@ -109,7 +109,7 @@ function partiePerdu() {
     $('#score').hide();
     $('.return').hide();
     $('#perdu').show();
-    $('#perdu p').text("Vous avez perdu" + "Score :" + compteur)
+    $('#scorePerdu').text("Score :" + compteur)
     $('#retour').on('click', function () {
         document.location.href = "/";
     });

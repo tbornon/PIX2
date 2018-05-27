@@ -30,8 +30,8 @@
     color :white;
     margin: auto;
     margin-top: 20px;
-    left: 30px;
-    position: absolute
+    font-size: 30px;
+    text-align: center;
 }
 #retour{
     width: 100px;
