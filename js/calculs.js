@@ -18,7 +18,7 @@ var compteur = 0
 //à mettre ds boucles var chiffre2= getRandomIntInclusive(0,9);
 var operateur;
 
-    
+
 // lorsque la page est chargée
 $(document).ready(function () {
 
@@ -27,7 +27,7 @@ $(document).ready(function () {
     // Génère les chiffres, l'opération et le résultat attendu
     genererPartie();
     $('#perdu').hide();
-    
+
     // Lorsque l'on appuie sur une touche du clavier
     socket.on('keypressed', function (data) {
         if (!perdu) {
@@ -47,7 +47,7 @@ $(document).ready(function () {
                     $('#score p').text("Score : " + 0);
                     compteur = 0;
                     perdu = true;
-                    perdu();
+                    partiePerdu();
                 }
             }
         }
@@ -104,17 +104,16 @@ function genererPartie() {
     $("#main p").text(chiffre1 + " " + operateur + " " + chiffre2 + " = " + " ? ");
 }
 
-function perdu() {
+function partiePerdu() {
     $('#main').hide();
     $('#score').hide();
     $('.return').hide();
     $('#perdu').show();
-    $('#perdu p').text("Vous avez perdu"+"Score :"+compteur)
+    $('#perdu p').text("Vous avez perdu" + "Score :" + compteur)
     $('#retour').on('click', function () {
         document.location.href = "/";
     });
     $('#play').on('click', function () {
         console.log("Relance une partie");
-        return;
     });
 }
