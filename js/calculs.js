@@ -33,7 +33,7 @@ $(document).ready(function () {
             resultat += data.number
             if (resultat.length == nombreattendu.toString().length) {
                 if (resultat == nombreattendu) {
-                    console.log("LE resultat donné est :" + resultat);
+                    console.log("Le resultat donné est :" + resultat);
                     console.log("Bien joué")
                     compteur++;
                     $('#score p').text("Score : " + compteur);
