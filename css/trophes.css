@@ -1,60 +1,83 @@
-.game {
-    width: 24%;
+.small {
+    width: 20%;
     height: 40px;
-    display: inline-block;
+}
+
+.small p {
+    font-size: 30px;
+}
+
+.button {    
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
-    opacity: 0.5;
-}
-
-.game p {
-    font-size: 30px;
-    margin-top: 0px;
-    font-family: 'VT323', monospace;
-    font-style: bold;
-    width: 100%;
-    text-align: center;
-}
-
-.selected {
-    opacity: 1;
-}
-
-#score {
-    width: 100%;
-
-}
-
-#score td {
-    text-align: center;
-}
-#score table tr:nth-child(even) {
-    background-color: #eee;
-}
-#score table tr:nth-child(odd) {
-    background-color: #fff;
-}
-#score table th {
-    background-color: #fff;
-}
-
-.return {
     position: absolute;
-    width: 130px;
-    height: 40px;
-    bottom: 15px;
-    right: 15px;
-    cursor: pointer;
-    user-select: none;
-    -moz-user-select: none;
+    bottom: 10px;
+    right: 10px;
 }
 
-.return p {
+.button p {
     font-family: 'VT323', monospace;
     font-style: bold;
     width: 100%;
     text-align: center;
-    font-size: 30px;
-    margin-top: 1px;
+    margin: 0;
+}
+
+.amis{
+    text-align: right;
+    position: relative;
+    margin: 5px;
+    right: 5px;
+    display: inline-block;
+}
+
+#pseudo{
+    display: inline-block;
+    margin: 5px;
+}
+
+#pseudo p{ 
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+}
+
+#avatar{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    margin: 5px;
+    background-color: black;
+    display: inline-block;
+}
+
+.onglets {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.onglets button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.onglets button:hover {
+    background-color: #ddd;
+}
+
+.onglets button.active {
+    background-color: #ccc;
+}
+
+.contenuOnglet {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }

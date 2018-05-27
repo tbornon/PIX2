@@ -9,56 +9,53 @@
     <link rel="stylesheet" href="/css/noOverflow.css">
     <link rel="stylesheet" href="/css/trophes.css">
     <script src="/js/jquery.js"></script>
-    <script src="/js/loadColor.js"></script>
+    <!--<script src="/js/loadColor.js"></script>-->
     <script src="/js/trophes.js"></script>
 </head>
 
 <body>
-    <div class="game coloredBg selected">
-        <p>Simon</p>
-    </div>
+    <div>
+        <div>            
+            <div id = "avatar">
+            </div>
+        
 
-    <div class="game coloredBg">
-        <p>Calcul</p>
-    </div>
+            <div id = "pseudo">
+                <p>Pseudo</p>
+            </div>
 
-    <div class="game coloredBg">
-        <p>Note</p>
-    </div>
+            <div class = "amis">
+                <input id="checkBoxAmis" type="checkbox">
+                <label for="checkBoxAmis">Afficher amis</label>
+            </div>
+        </div>
 
-    <div class="game coloredBg">
-        <p>Mélodie</p>
-    </div>
+        <div class="small button blackBg" id="return">
+            <p>Retour</p>
+        </div>
 
-    <h1>Meilleurs scores :</h1>
-
-    <div id="score">
-        <table>
-            <tr>
-                <th>Postion</th>
-                <th>Score</th>
-                <th>Par</th>
-            </tr>
-            <tr>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>5</td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="return blackBg">
-        <p>Retour</p>
+        <div>
+            <div class="onglets">
+                <button id="boutonSimon" class="lienOnglet" onclick="ouvrirOnglet(event, 'Simon')">Simon</button>
+                <button class="lienOnglet" onclick="ouvrirOnglet(event, 'Couleur')">Couleur</button>
+                <button class="lienOnglet" onclick="ouvrirOnglet(event, 'Calcul')">Calcul</button>
+            </div>
+            
+            <div id="Simon" class="contenuOnglet">
+                <h3>London</h3>
+                <p>London is the capital city of England.</p>
+            </div>
+            
+            <div id="Couleur" class="contenuOnglet">
+                <h3>Paris</h3>
+                <p>Paris is the capital of France.</p> 
+            </div>
+            
+            <div id="Calcul" class="contenuOnglet">
+                <h3>Tokyo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+        </div>
     </div>
 </body>
 
