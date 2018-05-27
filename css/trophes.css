@@ -24,16 +24,24 @@
     margin: 0;
 }
 
+#headerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
 .amis{
     text-align: right;
     position: relative;
     margin: 5px;
     right: 5px;
     display: inline-block;
+    margin-left: auto;
 }
 
 #pseudo{
-    display: inline-block;
     margin: 5px;
 }
 
@@ -45,16 +53,14 @@
 #avatar{
     width: 50px;
     height: 50px;
-    position: relative;
-    margin: 5px;
     background-color: black;
-    display: inline-block;
 }
 
 .onglets {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
+    width: 240px;
 }
 
 .onglets button {
@@ -65,6 +71,7 @@
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    width: 80px;
 }
 
 .onglets button:hover {
@@ -77,7 +84,26 @@
 
 .contenuOnglet {
     display: none;
-    padding: 6px 12px;
+    padding: 5px 10px;
     border: 1px solid #ccc;
-    border-top: none;
+    height: 145px;
 }
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th{
+    height: 20px;
+}
+
+th, td{
+    padding: 5px;
+}
+
+table, th, td{
+    border: 1px solid black;
+    text-align: center;
+}
+
