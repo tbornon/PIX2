@@ -95,6 +95,8 @@ table{
 }
 
 th{
+    background-color: blue;
+    color: white;
     height: 20px;
 }
 
@@ -102,8 +104,11 @@ th, td{
     padding: 5px;
 }
 
+tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+
 table, th, td{
-    border: 1px solid black;
     text-align: center;
 }
 
