@@ -74,7 +74,7 @@ app.get('/config/pseudo', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '\\menu.html');
+    res.sendFile(__dirname + '\\calculs.html');
 });
 
 app.get('/parametres', (req, res) => {
@@ -188,6 +188,10 @@ io.on('connection', (socket) => {
     socket.on('keypressed', (data) => {
         socket.broadcast.emit('keypressed', data);
         console.log("Keypressed :", data);
+    })
+
+    socket.on('playsound', (data) => {
+        console.log("Joue le son " + data.number);
     })
 });
 
