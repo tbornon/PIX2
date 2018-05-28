@@ -50,3 +50,53 @@ h1 {
     width: 100%;
     text-align: center;
 }
+.perdu {
+    width: 47%;
+    height: 150px;
+    background: radial-gradient(black, rgb(90, 90, 90));
+    margin: auto;
+    margin-top: 80px;
+    position: relative;
+}
+.perdu p{
+    font-style: bold;
+    font-family: 'VT323', monospace;
+    color :white;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+#retour{
+    width: 100px;
+    height: 40px;
+    bottom: 15px;
+    left: 15px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    font-style: bold;
+    font-family: 'VT323', monospace;
+    position: absolute;
+}
+#play{
+    width: 100px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    font-style: bold;
+    font-family: 'VT323', monospace;
+    position: absolute;
+}
+#score p {
+    width: 460px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 15px;
+}

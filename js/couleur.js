@@ -11,7 +11,7 @@ const COULEUR = ["Blanche", "Rouge", "Orange", "Jaune", "Verte", "Bleue", "Viole
 
 $(document).ready(function () {
     difficulty = document.location.pathname.replace('/couleur/', '');
-
+    $('#perdu').hide();
     var socket = io('http://localhost:3000');
 
     socket.on('keypressed', function (data) {
@@ -51,4 +51,12 @@ function perdu() {
     peutAppuyer = false;
     clearInterval(timerLoop);
     clearTimeout(timerPerdu);
+    $('.perdu').show();
+    $('#scorePerdu').text("Score :" + compteur)
+    $('#retour').on('click', function () {
+        document.location.href = "/";
+    });
+    $('#play').on('click', function () {
+        console.log("Relance une partie");
+    });
 }
