@@ -93,7 +93,7 @@ h1 {
     font-family: 'VT323', monospace;
     position: absolute;
 }
-#score p {
+#scorePerdu p {
     width: 460px;
     text-align: center;
     font-size: 30px;
