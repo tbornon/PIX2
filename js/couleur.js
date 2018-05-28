@@ -51,6 +51,9 @@ function perdu() {
     peutAppuyer = false;
     clearInterval(timerLoop);
     clearTimeout(timerPerdu);
+    $('#affichage').hide();
+    $('#score').hide();
+    $('.retour').hide();
     $('.perdu').show();
     $('#scorePerdu').text("Score :" + compteur)
     $('#retour').on('click', function () {
