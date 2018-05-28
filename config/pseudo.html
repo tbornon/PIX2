@@ -44,18 +44,29 @@
                     'Q S D F G H J K L M {enter}',
                     '{s} W X C V B N {s}'
                 ]
-            },
-            buildKey: function (keyboard, data) {
-                console.log(data);
-                return data;
             }
-
         });
 
         $('#ipad').getkeyboard().reveal();
 
         $.keyboard.keyaction.enter = function (base) {
-            console.log($("textarea").val());
+            let name = $("textarea")[1].value;
+            console.log(name);
+            $.ajax({
+                url: "/api/name",
+                type: "POST",
+                data: { "name": name },
+                success: function (data) {
+                    if (data == "ok") {
+                        if (document.referrer == "http://localhost/parametres")
+                            document.location.href = "/";
+                        else
+                            document.location.href = "/";
+                    } else {
+                        console.error("Invalid answer : " + data);
+                    }
+                }
+            });
         };
     </script>
 </body>

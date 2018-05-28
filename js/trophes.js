@@ -11,11 +11,11 @@ function ouvrirOnglet(evenement, nomJeu) {
         lienOnglet[i].className = lienOnglet[i].className.replace(" active", "");
     }
 
-    document.getElementById(nomJeu).style.display = "block";
+    $("#" + nomJeu).css("display", "block");
     evenement.currentTarget.className += " active";
 }
 
-window.onload = function(){
-    document.getElementById('Simon').style.display = "block";
-    document.getElementById('boutonSimon').classList.add("active") ;
-};
+$(document).ready(function() {
+    $('#Simon').css("display", "block");
+    $('#boutonSimon').addClass("active") ;
+});

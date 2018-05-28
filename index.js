@@ -41,11 +41,14 @@ app.all('(?!*api)*', (req, res, next) => {
             res.writeHead(302, { 'Location': '/config/colors' })
         else if (actualUser.avatar.seed == null)
             res.writeHead(302, { 'Location': '/config/avatar' })
+        else if (actualUser.name == null)
+            res.writeHead(302, { 'Location': '/config/pseudo' })
         res.end();
     } else
         next();
 })
 
+/****************************  CONFIG  ****************************/
 app.get('/config/welcome', (req, res) => {
     if (actualUser == null) {
         actualUser = new User();
@@ -73,8 +76,9 @@ app.get('/config/pseudo', (req, res) => {
     res.sendFile(__dirname + '\\config\\pseudo.html');
 });
 
+/****************************  PAGE STATIQUE  ****************************/
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '\\calculs.html');
+    res.sendFile(__dirname + '\\menu.html');
 });
 
 app.get('/parametres', (req, res) => {
@@ -93,6 +97,15 @@ app.get('/debug', (req, res) => {
     res.sendFile(__dirname + '\\debug.html');
 });
 
+app.get('/simon/*', (req, res) => {
+    res.sendFile(__dirname + '\\simon.html');
+});
+
+app.get('/couleur/*', (req, res) => {
+    res.sendFile(__dirname + '\\couleur.html');
+});
+
+/****************************  API  ****************************/
 app.post('/api/color', (req, res) => {
     console.log("Changing actual user color to : " + req.body.color);
     actualUser.color = req.body.color;
@@ -103,14 +116,6 @@ app.post('/api/color', (req, res) => {
         }
         else res.send('ok');
     })
-});
-
-app.get('/simon/*', (req, res) => {
-    res.sendFile(__dirname + '\\simon.html');
-});
-
-app.get('/couleur/*', (req,res) => {
-    res.sendFile(__dirname + '\\couleur.html');
 });
 
 app.get('/api/color', (req, res) => {
@@ -138,6 +143,22 @@ app.get('/api/avatar', (req, res) => {
     });
 });
 
+app.post('/api/name', (req, res) => {
+    actualUser.name = req.body.name;
+    actualUser.save((err) => {
+        if (err) {
+            throw err;
+            res.send(err);
+        } else {
+            res.send("ok");
+        }
+    });
+});
+
+app.get('/api/name', (req, res) => {
+    res.json({ name: actualUser.name });
+});
+
 app.get('/api/score/:game/:number', (req, res) => {
     Score.findMax(req.params.game.toLowerCase(), req.params.number, (err, data) => {
         if (err) {
@@ -155,7 +176,7 @@ app.post('/api/score', (req, res) => {
     score.game = req.body.game.toLowerCase();
     score.score = req.body.score;
     score.save((err) => {
-        if(err) {
+        if (err) {
             res.send(err);
             throw err;
         }
@@ -166,8 +187,8 @@ app.post('/api/score', (req, res) => {
 });
 
 app.get('/api/user/:id', (req, res) => {
-    User.findOne({_id: req.params.id}, (err, data) => {
-        if(err) {
+    User.findOne({ _id: req.params.id }, (err, data) => {
+        if (err) {
             res.send(err);
             throw err;
         } else {
@@ -177,8 +198,8 @@ app.get('/api/user/:id', (req, res) => {
 });
 
 app.get('/api/user', (req, res) => {
-    User.findOne({mainUser: true}, (err, data) => {
-        if(err) {
+    User.findOne({ mainUser: true }, (err, data) => {
+        if (err) {
             res.send(err);
             throw err;
         } else {

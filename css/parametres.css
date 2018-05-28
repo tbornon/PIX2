@@ -1,13 +1,13 @@
 .large {
     width: 80%;
-    height: 80px;
+    height: 60px;
     margin: auto;
 }
 
 .large p {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 40px;
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
 .small {

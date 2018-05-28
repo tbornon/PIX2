@@ -4,6 +4,15 @@ var gender = "male";
 
 
 $(document).ready(function () {
+    $.ajax({
+        url: "/api/avatar",
+        success: function(data) {
+            console.log(data)
+            if(data.seed != null) avatarCounterSeed = data.seed;
+            showAvatar(avatarCounterSeed, "male");
+        }
+    });
+
     $('.coloredBg').addClass(selectedColor + "Bg");
     $('.coloredFg').addClass(selectedColor + "Fg");
     showAvatar(avatarCounterSeed, "male");
@@ -40,13 +49,13 @@ $(document).ready(function () {
                     if(document.referrer == "http://localhost/parametres")
                         document.location.href = "/";
                     else
-                        document.location.href = "/";
+                        document.location.href = "/config/pseudo";
                 } else {
                     console.error("Invalid answer : " + data);
                 }
             }
-        })
-    })
+        });
+    });
 });
 
 /* Génère un avatar et l'affiche en fonction d'une seed et d'un genre donné */
