@@ -58,9 +58,7 @@
 
 .onglets {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 240px;
+    width: 245px;
 }
 
 .onglets button {
@@ -72,14 +70,16 @@
     padding: 14px 16px;
     transition: 0.3s;
     width: 80px;
+    opacity: 0.6;
 }
 
 .onglets button:hover {
-    background-color: #ddd;
+    opacity: 0.8;
 }
 
 .onglets button.active {
-    background-color: #ccc;
+    opacity: 1;
+    box-shadow: 3px 3px 5px #666666;
 }
 
 .contenuOnglet {
@@ -95,7 +95,7 @@ table{
 }
 
 th{
-    background-color: blue;
+    background-color: grey;
     color: white;
     height: 20px;
 }
