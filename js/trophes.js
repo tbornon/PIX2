@@ -18,4 +18,8 @@ function ouvrirOnglet(evenement, nomJeu) {
 $(document).ready(function() {
     $('#Simon').css("display", "block");
     $('#boutonSimon').addClass("active") ;
+
+    $('#return').on('click', function() {
+        document.location.href = "/"
+    })
 });
