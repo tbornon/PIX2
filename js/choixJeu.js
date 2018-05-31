@@ -10,4 +10,8 @@ $(document).ready(function() {
     $('#couleur').on('click', function() {
         document.location.href = "/couleur/";
     });
+
+    $('#calcul').on('click', function() {
+        document.location.href = "/calculs/";
+    });
 })

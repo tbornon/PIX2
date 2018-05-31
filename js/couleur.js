@@ -4,12 +4,18 @@ var timerPerdu;
 var idCouleur;
 var idCouleurPrecedent;
 var peutAppuyer = false;
-var score = 0;
+var score = -1;
 
-const TEMPS_PERDU = 2000;
+var bestScore;
+var bestScoreUser;  
+
+const TEMPS_PERDU = 3000;
 const COULEUR = ["Blanche", "Rouge", "Orange", "Jaune", "Verte", "Bleue", "Violette", "Rose", "Marron", "Noire"];
 
 $(document).ready(function () {
+    $('#yourScore').hide();
+    $('#bestScore').hide();
+
     difficulty = document.location.pathname.replace('/couleur/', '');
     $('#perdu').hide();
     var socket = io('http://localhost:3000');
@@ -26,6 +32,19 @@ $(document).ready(function () {
 
     $('.retour').on('click', function() {
         document.location.href="/";
+    });
+
+    $.ajax({
+        url: '/api/score/couleur/1',
+        success: function (data) {
+            bestScore = data[0];
+            $.ajax({
+                url: '/api/user/' + bestScore.userId,
+                success: function (user) {
+                    bestScoreUser = user;
+                }
+            });
+        }
     });
 
     jouer();
@@ -53,13 +72,31 @@ function perdu() {
     clearTimeout(timerPerdu);
     $('#affichage').hide();
     $('#score').hide();
-    $('.retour').hide();
-    $('.perdu').show();
-    $('#scorePerdu').text("Score :" + compteur)
-    $('#retour').on('click', function () {
-        document.location.href = "/";
+    $('h1').hide();
+
+    $('#yourScore').show();
+    $('#bestScore').show();
+
+    let data = {
+        score: score,
+        game: 'couleur'
+    }
+
+    $.ajax({
+        url: "/api/score",
+        type: 'POST',
+        data: data,
+        success: function (data) {
+            if (data == "ok") console.log("saved");
+            else console.error("err : " + data);
+        }
     });
-    $('#play').on('click', function () {
-        console.log("Relance une partie");
-    });
+
+    if (bestScore != undefined && bestScore.score > data.score) {
+        $('#yourScore p').text("Votre score : " + score);
+        $('#bestScore p').text("Meilleur score : " + bestScore.score);
+    } else {
+        $('#yourScore p').text("Votre score : " + score);
+        $('#bestScore p').text("Meilleur score : " + score);
+    }
 }

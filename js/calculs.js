@@ -18,10 +18,14 @@ var compteur = 0
 //à mettre ds boucles var chiffre2= getRandomIntInclusive(0,9);
 var operateur;
 
+var bestScore;
+var bestScoreUser;  
+
 
 // lorsque la page est chargée
 $(document).ready(function () {
-
+    $('#yourScore').hide();
+    $('#bestScore').hide();
     // Connexion à la websocket pour récupérer les infos du clavier
     var socket = io('http://localhost:3000');
     // Génère les chiffres, l'opération et le résultat attendu
@@ -45,15 +49,28 @@ $(document).ready(function () {
                 else {
                     console.log("perdu");
                     $('#score p').text("Score : " + 0);
-                    compteur = 0;
                     perdu = true;
                     partiePerdu();
                 }
             }
         }
     });
-    $('.return').on('click', function () {
+    
+    $('.retour').on('click', function () {
         document.location.href = "/";
+    });
+
+    $.ajax({
+        url: '/api/score/calcul/1',
+        success: function (data) {
+            bestScore = data[0];
+            $.ajax({
+                url: '/api/user/' + bestScore.userId,
+                success: function (user) {
+                    bestScoreUser = user;
+                }
+            });
+        }
     });
 });
 
@@ -107,13 +124,30 @@ function genererPartie() {
 function partiePerdu() {
     $('#main').hide();
     $('#score').hide();
-    $('.return').hide();
-    $('#perdu').show();
-    $('#scorePerdu').text("Score :" + compteur)
-    $('#retour').on('click', function () {
-        document.location.href = "/";
+
+    $('#yourScore').show();
+    $('#bestScore').show();
+
+    let data = {
+        score: compteur,
+        game: 'calcul'
+    }
+
+    $.ajax({
+        url: "/api/score",
+        type: 'POST',
+        data: data,
+        success: function (data) {
+            if (data == "ok") console.log("saved");
+            else console.error("err : " + data);
+        }
     });
-    $('#play').on('click', function () {
-        console.log("Relance une partie");
-    });
+
+    if (bestScore != undefined && bestScore.score > data.score) {
+        $('#yourScore p').text("Votre score : " + compteur);
+        $('#bestScore p').text("Meilleur score : " + bestScore.score);
+    } else {
+        $('#yourScore p').text("Votre score : " + compteur);
+        $('#bestScore p').text("Meilleur score : " + compteur);
+    }
 }

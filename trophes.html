@@ -15,15 +15,16 @@
 
 <body>
     <div>
-        <div id="headerContainer">            
-            <div id = "avatar">
+        <div id="headerContainer">
+            <div id="avatar">
+                <img id="avatarImg" src="res/avatar.png" alt="Avatar">
             </div>
 
-            <div id = "pseudo">
-                <p>Pseudo</p>
+            <div id="pseudo">
+                <p></p>
             </div>
 
-            <div class = "amis">
+            <div class="amis">
                 <input id="checkBoxAmis" type="checkbox">
                 <label for="checkBoxAmis">Afficher amis</label>
             </div>
@@ -39,7 +40,7 @@
                 <button class="lienOnglet redTab" onclick="ouvrirOnglet(event, 'Couleur')">Couleur</button>
                 <button class="lienOnglet redTab" onclick="ouvrirOnglet(event, 'Calcul')">Calcul</button>
             </div>
-            
+
             <div id="Simon" class="contenuOnglet" style="overflow-y: auto;">
                 <table>
                     <col width="15%">
@@ -62,7 +63,7 @@
                     </tr>
                 </table>
             </div>
-            
+
             <div id="Couleur" class="contenuOnglet" style="overflow-y: auto;">
                 <table>
                     <col width="15%">
@@ -83,9 +84,9 @@
                         <td>Tanguy</td>
                         <td>1200</td>
                     </tr>
-                    </table> 
+                </table>
             </div>
-            
+
             <div id="Calcul" class="contenuOnglet" style="overflow-y: auto;">
                 <table>
                     <col width="15%">
@@ -106,7 +107,7 @@
                         <td>Martin</td>
                         <td>2000</td>
                     </tr>
-                    </table>
+                </table>
             </div>
         </div>
     </div>

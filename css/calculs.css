@@ -1,15 +1,16 @@
 #main {
-    width: 47%;
+    width: 75%;
     height: 150px;
     background: radial-gradient(#0068FF, #59A4E2);
     box-shadow: 3px 3px 5px #80B4FF;
     margin:auto;
-    margin-top: 80px;
+    margin-top: 30px;
 }
 #main p
 {
     text-align: center;
-    font-size: 40px;
+    font-size: 80px;
+    margin-top: 0;
     line-height: 150px;
     text-shadow: 1px 1px 5px #333333;
     color: white;
@@ -33,19 +34,38 @@
     font-size: 30px;
     text-align: center;
 }
-#retour{
-    width: 100px;
+
+#score {
+    width: 70%;
     height: 40px;
+    position: absolute;
     bottom: 15px;
-    left: 15px;
-    text-align: center;
+    left:15px;
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
-    font-style: bold;
-    font-family: 'VT323', monospace;
-    position: absolute;
 }
+
+.retour {
+    width: 20%;
+    height: 40px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.retour p, #score p {
+    font-size: 30px;
+    margin-top: 0px;
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+}
+
 #play{
     width: 100px;
     height: 40px;
@@ -78,10 +98,39 @@
     font-style: bold;
     font-family: 'VT323', monospace;
 }
-#score p {
-    width: 460px;
-    text-align: center;
+
+.large {
+    width: 80%;
+    height: 80px;
+    margin: auto;
+}
+
+.large p {
+    margin-top: 30px;
+    font-size: 40px;
+    padding-top: 15px;
+}
+
+.small {
+    width: 20%;
+    height: 40px;
+    margin-left: 325px;
+
+}
+
+.small p {
     font-size: 30px;
-    font-weight: bold;
-    margin-top: 15px;
+}
+
+.button {    
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.button p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
 }

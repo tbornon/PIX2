@@ -22,15 +22,6 @@ h1 {
     -moz-user-select: none;
 }
 
-#score p {
-    font-size: 30px;
-    margin-top: 0px;
-    font-family: 'VT323', monospace;
-    font-style: bold;
-    width: 100%;
-    text-align: center;
-}
-
 .retour {
     width: 20%;
     height: 40px;
@@ -42,7 +33,7 @@ h1 {
     -moz-user-select: none;
 }
 
-.retour p {
+.retour p, #score p {
     font-size: 30px;
     margin-top: 0px;
     font-family: 'VT323', monospace;
@@ -99,4 +90,39 @@ h1 {
     font-size: 30px;
     font-weight: bold;
     margin-top: 15px;
+}
+.large {
+    width: 80%;
+    height: 80px;
+    margin: auto;
+}
+
+.large p {
+    margin-top: 30px;
+    font-size: 40px;
+    padding-top: 15px;
+}
+
+.small {
+    width: 20%;
+    height: 40px;
+    margin-left: 325px;
+
+}
+
+.small p {
+    font-size: 30px;
+}
+
+.button {    
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.button p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
 }

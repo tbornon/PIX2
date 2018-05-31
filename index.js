@@ -105,6 +105,10 @@ app.get('/couleur/*', (req, res) => {
     res.sendFile(__dirname + '/couleur.html');
 });
 
+app.get('/calculs/*', (req, res) => {
+    res.sendFile(__dirname + '/calculs.html');
+});
+
 /****************************  API  ****************************/
 app.post('/api/color', (req, res) => {
     console.log("Changing actual user color to : " + req.body.color);

@@ -4,7 +4,7 @@ var listeCouleur = ["green", "red", "yellow", "blue"];
 var couleursAleatoires = [];
 
 // temps que le joueur a pour appuyer sur la bonne touche (en ms)
-var tempsPourAppuyer = 5000
+const TEMPS_PERDU = 5000
 
 // est ce que le joueur peut appuyer sur les touches
 var peutAppuyer = false;
@@ -162,7 +162,7 @@ function afficherCouleurs(index) {
                 // sinon le joueur peut à nouveau appuyer
                 peutAppuyer = true;
                 // s'il n'appuie pas sur une touche dans les 5s, il a perdu
-                timer = setTimeout(function () { perdu = true; }, tempsPourAppuyer);
+                timer = setTimeout(function () { perdu = true; }, TEMPS_PERDU);
             }
         }, 100);
     }, 500);
