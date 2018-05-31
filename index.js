@@ -65,44 +65,44 @@ app.get('/config/welcome', (req, res) => {
 });
 
 app.get('/config/colors', (req, res) => {
-    res.sendFile(__dirname + '\\config\\colors.html');
+    res.sendFile(__dirname + '/config/colors.html');
 });
 
 app.get('/config/avatar', (req, res) => {
-    res.sendFile(__dirname + '\\config\\avatar.html');
+    res.sendFile(__dirname + '/config/avatar.html');
 });
 
 app.get('/config/pseudo', (req, res) => {
-    res.sendFile(__dirname + '\\config\\pseudo.html');
+    res.sendFile(__dirname + '/config/pseudo.html');
 });
 
 /****************************  PAGE STATIQUE  ****************************/
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '\\menu.html');
+    res.sendFile(__dirname + '/menu.html');
 });
 
 app.get('/parametres', (req, res) => {
-    res.sendFile(__dirname + "\\parametres.html");
+    res.sendFile(__dirname + "/parametres.html");
 });
 
 app.get('/trophes', (req, res) => {
-    res.sendFile(__dirname + "\\trophes.html");
+    res.sendFile(__dirname + "/trophes.html");
 });
 
 app.get('/choixJeu', (req, res) => {
-    res.sendFile(__dirname + "\\choixJeu.html");
+    res.sendFile(__dirname + "/choixJeu.html");
 });
 
 app.get('/debug', (req, res) => {
-    res.sendFile(__dirname + '\\debug.html');
+    res.sendFile(__dirname + '/debug.html');
 });
 
 app.get('/simon/*', (req, res) => {
-    res.sendFile(__dirname + '\\simon.html');
+    res.sendFile(__dirname + '/simon.html');
 });
 
 app.get('/couleur/*', (req, res) => {
-    res.sendFile(__dirname + '\\couleur.html');
+    res.sendFile(__dirname + '/couleur.html');
 });
 
 /****************************  API  ****************************/
