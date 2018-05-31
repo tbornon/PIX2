@@ -56,7 +56,7 @@ app.get('/config/welcome', (req, res) => {
         actualUser.save((err) => {
             if (err) throw err;
             console.log("New main user has been created and saved successfuly")
-            res.sendFile(__dirname + '\\config\\welcome.html');
+            res.sendFile(__dirname + '/config/welcome.html');
         })
     } else {
         response.writeHead(302, { 'Location': '/' });
