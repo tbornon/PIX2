@@ -6,25 +6,39 @@ const mongoose = require('mongoose');
 const io = require('socket.io')(http);
 const User = require('./models/User');
 const Score = require('./models/Score');
+const fs = require('fs');
 
 var actualUser;
+var db;
+var config;
 
-mongoose.connect('mongodb://localhost/pix');
+fs.readFile('config.json', 'utf8', (err, data) => {
+    if (err) console.error(err);
 
-var db = mongoose.connection;
+    config = JSON.parse(data);
 
-db.on('error', console.error.bind(console, 'connection error:'))
-
-db.once('open', () => {
-    console.log("Connected to database");
-    User.findOne({ 'mainUser': true }, (err, res) => {
-        if (err) throw err;
-        if (res != null) {
-            actualUser = res;
-            console.log("Main user successfuly loaded");
-        } else console.log("No main user detected");
+    mongoose.connect(`mongodb://${config.database.host}/pix`, (err) => {
+        if (err) console.error(err);
     });
-})
+
+    db = mongoose.connection;
+
+    db.on('error', console.error.bind(console, 'connection error:'))
+
+    db.once('open', () => {
+        console.log("Connected to database");
+        User.findOne({ 'mainUser': true }, (err, res) => {
+            if (err) throw err;
+            if (res != null) {
+                actualUser = res;
+                console.log("Main user successfuly loaded");
+            } else console.log("No main user detected");
+        });
+    });
+});
+
+
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -113,7 +127,7 @@ app.get('/calculs/*', (req, res) => {
     res.sendFile(__dirname + '/jeux/calculs.html');
 });
 
-app.get('/ping', (req,res) => {
+app.get('/ping', (req, res) => {
     console.log(req.hostname);
     res.send('pong');
 });
