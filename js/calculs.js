@@ -27,7 +27,7 @@ $(document).ready(function () {
     $('#yourScore').hide();
     $('#bestScore').hide();
     // Connexion à la websocket pour récupérer les infos du clavier
-    var socket = io('http://localhost:3000');
+    var socket = io('http://' + document.location.host + ':3000');
     // Génère les chiffres, l'opération et le résultat attendu
     genererPartie();
     $('#perdu').hide();

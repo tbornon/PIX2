@@ -1,7 +1,7 @@
 $(document).ready(function () {
     console.log("Ready");
 
-    var hostname = window.hostname;
+    var hostname = document.location.host;
 
     var socket = io('http://'+ hostname  + ':3000');
 
