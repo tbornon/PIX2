@@ -4,8 +4,6 @@ const { spawn } = require('child_process');
 
 // Connexion à la websocket
 const socket = io('http://localhost:3000');
-// Création du point d'accès wifi
-const ls = spawn('stdbuf', ['-i0', '-o0', '-e0', 'hostapd', '/etc/hostapd/hostapd.conf']);
 
 var file =
     `interface=wlan0
@@ -29,12 +27,10 @@ fs.writeFile('./hostapd.conf', file, (err) => {
     if (err) console.error(err);
     console.log("Config file written !");
 
-    let ls = spawn('stdbuf', ['-i0', '-o0', '-e0', 'hostapd', './hostapd.conf']);
+    let ls = spawn('stdbuf', ['-i0', '-o0', '-e0', 'hostapd', 'hostapd.conf']);
 
     // Lecture des données entrantes
     ls.stdout.on('data', (data) => {
-        console.log(data);
-
         if (data.indexOf("AP-ENABLED") !== -1) {
             console.log("AP point created successfuly");
             socket.emit('multi', { msg: "AP-ENABLED" })
