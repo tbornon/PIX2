@@ -243,23 +243,22 @@ app.get('/api/startMulti/', (req, res) => {
     let ssid = actualUser.name;
 
     var file = `interface=wlan0
-        driver=nl80211
-        ssid=${ssid}
-        hw_mode=g
-        channel=6
-        ieee80211d=0
-        #country_code=FR
-        ieee80211n=1
-        wmm_enabled=0
-        macaddr_acl=0
-        auth_algs=1
-        ignore_broadcast_ssid=0
-        wpa=2
-        wpa_passphrase=testtest
-        wpa_key_mgmt=WPA-PSK
-        rsn_pairwise=CCMP`;
+driver=nl80211
+ssid=${ssid}
+hw_mode=g
+channel=6
+ieee80211d=0
+#country_code=FR
+ieee80211n=1
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=testtest
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP`;
 
-    file = file.replace(' ', '')
 
     fs.writeFile('hostapd.conf', file, (err) => {
         if (err) console.error(err);
