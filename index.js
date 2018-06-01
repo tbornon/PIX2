@@ -241,7 +241,7 @@ app.get('/api/user', (req, res) => {
 app.get('/api/startMulti/', (req, res) => {
     //var ssid = "[PIX2]" + req.params.name;
     let ssid = actualUser.name;
-    
+
     var file = `interface=wlan0
         driver=nl80211
         ssid=${ssid}
@@ -259,7 +259,7 @@ app.get('/api/startMulti/', (req, res) => {
         wpa_key_mgmt=WPA-PSK
         rsn_pairwise=CCMP`;
 
-    fs.writeFile('./hostapd.conf', file, (err) => {
+    fs.writeFile('hostapd.conf', file, (err) => {
         if (err) console.error(err);
         console.log("Config file written !");
 
