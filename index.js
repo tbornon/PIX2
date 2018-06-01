@@ -289,7 +289,9 @@ rsn_pairwise=CCMP`;
 });
 
 app.get('/api/stopMulti', (req, res) => {
-    //wifi_AP.kill('SIGINT');
+    wifi_AP.kill('SIGINT', () => {
+        console.log("Wifi AP killed");
+    });
     res.send('ok');
 });
 //#endregion
