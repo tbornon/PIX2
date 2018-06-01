@@ -4,6 +4,13 @@ var compteur = 0;
 $(document).ready(function () {
     waiting("Création de la partie en cours")
 
+    $.ajax({
+        url: '/api/startMulti',
+        success: function(data) {
+            if(data != 'ok') console.error('Invalid answer from server');
+        }
+    });
+
     var socket = io('http://' + document.location.host + ':3000');
 
     socket.on('multi', function (data) {

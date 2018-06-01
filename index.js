@@ -12,6 +12,7 @@ const { spawn } = require('child_process');
 var actualUser;
 var db;
 var config;
+var wifi_AP;
 
 fs.readFile('config.json', 'utf8', (err, data) => {
     if (err) console.error(err);
@@ -20,7 +21,7 @@ fs.readFile('config.json', 'utf8', (err, data) => {
 
     mongoose.connect('mongodb://' + config.database.host  + '/pix');
     db = mongoose.connection;
-    
+
     db.on('error', console.error.bind(console, 'connection error:'))
 
     db.once('open', () => {
@@ -237,9 +238,10 @@ app.get('/api/user', (req, res) => {
     })
 });
 
-app.get('/startMulti/:name:', (req, res) => {
-    var ssid = "[PIX2]" + req.params.name;
-
+app.get('/api/startMulti/', (req, res) => {
+    //var ssid = "[PIX2]" + req.params.name;
+    let ssid = actualUser.name;
+    
     var file = `interface=wlan0
         driver=nl80211
         ssid=${ssid}
@@ -261,10 +263,10 @@ app.get('/startMulti/:name:', (req, res) => {
         if (err) console.error(err);
         console.log("Config file written !");
 
-        let ls = spawn('stdbuf', ['-i0', '-o0', '-e0', 'hostapd', 'hostapd.conf']);
+        wifi_AP = spawn('stdbuf', ['-i0', '-o0', '-e0', 'hostapd', 'hostapd.conf']);
 
         // Lecture des données entrantes
-        ls.stdout.on('data', (data) => {
+        wifi_AP.stdout.on('data', (data) => {
             if (data.indexOf("AP-ENABLED") !== -1) {
                 console.log("AP point created successfuly");
                 io.sockets.emit('multi', { msg: "AP-ENABLED" })
@@ -272,16 +274,22 @@ app.get('/startMulti/:name:', (req, res) => {
         });
 
         // Lecture des erreurs entrantes
-        ls.stderr.on('data', (data) => {
+        wifi_AP.stderr.on('data', (data) => {
             console.error(data);
         });
 
         // Lors de la fermeture du process
-        ls.on('close', (code) => {
+        wifi_AP.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
         });
     });
 
+    res.send('ok');
+});
+
+app.get('/api/stopMulti', (req, res) => {
+    wifi_AP.kill('SIGINT');
+    res.send('ok');
 });
 //#endregion
 
