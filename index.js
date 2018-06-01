@@ -93,20 +93,29 @@ app.get('/choixJeu', (req, res) => {
     res.sendFile(__dirname + "/choixJeu.html");
 });
 
+app.get('/choixMulti', (req, res) => {
+    res.sendFile(__dirname + "/choixMulti.html");
+});
+
 app.get('/debug', (req, res) => {
     res.sendFile(__dirname + '/debug.html');
 });
 
 app.get('/simon/*', (req, res) => {
-    res.sendFile(__dirname + '/simon.html');
+    res.sendFile(__dirname + '/jeux/simon.html');
 });
 
 app.get('/couleur/*', (req, res) => {
-    res.sendFile(__dirname + '/couleur.html');
+    res.sendFile(__dirname + '/jeux/couleur.html');
 });
 
 app.get('/calculs/*', (req, res) => {
-    res.sendFile(__dirname + '/calculs.html');
+    res.sendFile(__dirname + '/jeux/calculs.html');
+});
+
+app.get('/ping', (req,res) => {
+    console.log(req.hostname);
+    res.send('pong');
 });
 
 /****************************  API  ****************************/

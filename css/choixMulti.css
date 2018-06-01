@@ -1,0 +1,39 @@
+.button {
+    width: 90%;
+    height: 80px;
+    margin: auto;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.button p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+    vertical-align: center;
+    font-size: 50px;
+    margin-top: 35px;
+    padding-top: 10px;
+}
+
+.return {
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    bottom: 15px;
+    left: 170px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.return p {
+    font-family: 'VT323', monospace;
+    font-style: bold;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 1px;
+}

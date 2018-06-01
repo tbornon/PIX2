@@ -18,6 +18,10 @@ $(document).ready(function () {
     $("#solo").on('click', function () {
         document.location.href = "/choixJeu";
     })
+
+    $("#multi").on('click', function() {
+        document.location.href = "/choixMulti";
+    })
 })
 
 function showAvatar(seed, gender) {
