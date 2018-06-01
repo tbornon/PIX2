@@ -18,14 +18,13 @@ fs.readFile('config.json', 'utf8', (err, data) => {
 
     config = JSON.parse(data);
 
-    mongoose.connect(`mongodb://${config.database.host}/pix`);
-
+    mongoose.connect('mongodb://' + config.database.host  + '/pix');
     db = mongoose.connection;
-
+    
     db.on('error', console.error.bind(console, 'connection error:'))
 
     db.once('open', () => {
-        console.log("Connected to database");
+        console.log("Connected to database @ " + config.database.host);
         User.findOne({ 'mainUser': true }, (err, res) => {
             if (err) throw err;
             if (res != null) {
