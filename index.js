@@ -268,7 +268,6 @@ rsn_pairwise=CCMP`;
 
         // Lecture des données entrantes
         wifi_AP.stdout.on('data', (data) => {
-            console.log("stdout : " + data);
             if (data.indexOf("AP-ENABLED") !== -1) {
                 console.log("AP point created successfuly");
                 io.sockets.emit('multi', { msg: "AP-ENABLED" })
