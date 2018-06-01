@@ -18,9 +18,7 @@ fs.readFile('config.json', 'utf8', (err, data) => {
 
     config = JSON.parse(data);
 
-    mongoose.connect(`mongodb://${config.database.host}/pix`, (err) => {
-        if (err) console.error(err);
-    });
+    mongoose.connect(`mongodb://${config.database.host}/pix`);
 
     db = mongoose.connection;
 
