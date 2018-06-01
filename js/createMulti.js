@@ -6,8 +6,8 @@ $(document).ready(function () {
 
     $.ajax({
         url: '/api/startMulti',
-        success: function(data) {
-            if(data != 'ok') console.error('Invalid answer from server');
+        success: function (data) {
+            if (data != 'ok') console.error('Invalid answer from server');
         }
     });
 
@@ -20,8 +20,17 @@ $(document).ready(function () {
         }
     });
 
-    $('.return').on('click', function() {
-        document.location.href="/";
+    $('.return').on('click', function () {
+        document.location.href = "/";
+    });
+});
+
+$(document).unload(function () {
+    $.ajax({
+        url: '/api/stopMulti',
+        success: function (data) {
+            if (data != 'ok') console.error('Invalid answer from server'); 
+        }
     });
 });
 
