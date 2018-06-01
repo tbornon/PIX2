@@ -7,7 +7,6 @@ const io = require('socket.io')(http);
 const User = require('./models/User');
 const Score = require('./models/Score');
 const fs = require('fs');
-const fs = require('fs');
 const { spawn } = require('child_process');
 
 var actualUser;
