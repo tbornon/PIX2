@@ -1,7 +1,9 @@
 $(document).ready(function () {
     console.log("Ready");
 
-    var socket = io('http://localhost:3000');
+    var hostname = window.hostname;
+
+    var socket = io('http://'+ hostname  + ':3000');
 
     socket.on('news', function (data) {
         console.log(data);
