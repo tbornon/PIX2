@@ -259,6 +259,8 @@ app.get('/api/startMulti/', (req, res) => {
         wpa_key_mgmt=WPA-PSK
         rsn_pairwise=CCMP`;
 
+    file = file.replace(' ', '')
+
     fs.writeFile('hostapd.conf', file, (err) => {
         if (err) console.error(err);
         console.log("Config file written !");
