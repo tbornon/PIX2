@@ -267,6 +267,7 @@ app.get('/api/startMulti/', (req, res) => {
 
         // Lecture des données entrantes
         wifi_AP.stdout.on('data', (data) => {
+            console.log("stdout : " + data);
             if (data.indexOf("AP-ENABLED") !== -1) {
                 console.log("AP point created successfuly");
                 io.sockets.emit('multi', { msg: "AP-ENABLED" })
@@ -288,7 +289,7 @@ app.get('/api/startMulti/', (req, res) => {
 });
 
 app.get('/api/stopMulti', (req, res) => {
-    wifi_AP.kill('SIGINT');
+    //wifi_AP.kill('SIGINT');
     res.send('ok');
 });
 //#endregion
