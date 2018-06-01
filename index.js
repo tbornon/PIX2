@@ -240,7 +240,7 @@ app.get('/api/user', (req, res) => {
 
 app.get('/api/startMulti/', (req, res) => {
     //var ssid = "[PIX2]" + req.params.name;
-    let ssid = actualUser.name;
+    let ssid = "[PIX2]" + actualUser.name;
 
     var file = `interface=wlan0
 driver=nl80211
