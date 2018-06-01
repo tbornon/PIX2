@@ -7,6 +7,8 @@ const io = require('socket.io')(http);
 const User = require('./models/User');
 const Score = require('./models/Score');
 const fs = require('fs');
+const fs = require('fs');
+const { spawn } = require('child_process');
 
 var actualUser;
 var db;
@@ -37,10 +39,6 @@ fs.readFile('config.json', 'utf8', (err, data) => {
     });
 });
 
-
-
-
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/js', express.static('js'));
@@ -62,7 +60,7 @@ app.all('(?!*api)*', (req, res, next) => {
         next();
 })
 
-/****************************  CONFIG  ****************************/
+//#region WEB
 app.get('/config/welcome', (req, res) => {
     if (actualUser == null) {
         actualUser = new User();
@@ -90,7 +88,6 @@ app.get('/config/pseudo', (req, res) => {
     res.sendFile(__dirname + '/config/pseudo.html');
 });
 
-/****************************  PAGE STATIQUE  ****************************/
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/menu.html');
 });
@@ -109,6 +106,14 @@ app.get('/choixJeu', (req, res) => {
 
 app.get('/choixMulti', (req, res) => {
     res.sendFile(__dirname + "/choixMulti.html");
+});
+
+app.get('/createMulti', (req, res) => {
+    res.sendFile(__dirname + "/createMulti.html");
+});
+
+app.get('/joinMulti', (req, res) => {
+    res.sendFile(__dirname + "/joinMulti.html");
 });
 
 app.get('/debug', (req, res) => {
@@ -131,8 +136,9 @@ app.get('/ping', (req, res) => {
     console.log(req.hostname);
     res.send('pong');
 });
+//#endregion
 
-/****************************  API  ****************************/
+//#region API
 app.post('/api/color', (req, res) => {
     console.log("Changing actual user color to : " + req.body.color);
     actualUser.color = req.body.color;
@@ -235,17 +241,72 @@ app.get('/api/user', (req, res) => {
     })
 });
 
+app.get('/startMulti/:name:', (req, res) => {
+    var ssid = "[PIX2]" + req.params.name;
+
+    var file = `interface=wlan0
+        driver=nl80211
+        ssid=${ssid}
+        hw_mode=g
+        channel=6
+        ieee80211d=0
+        #country_code=FR
+        ieee80211n=1
+        wmm_enabled=0
+        macaddr_acl=0
+        auth_algs=1
+        ignore_broadcast_ssid=0
+        wpa=2
+        wpa_passphrase=testtest
+        wpa_key_mgmt=WPA-PSK
+        rsn_pairwise=CCMP`;
+
+    fs.writeFile('./hostapd.conf', file, (err) => {
+        if (err) console.error(err);
+        console.log("Config file written !");
+
+        let ls = spawn('stdbuf', ['-i0', '-o0', '-e0', 'hostapd', 'hostapd.conf']);
+
+        // Lecture des données entrantes
+        ls.stdout.on('data', (data) => {
+            if (data.indexOf("AP-ENABLED") !== -1) {
+                console.log("AP point created successfuly");
+                io.sockets.emit('multi', { msg: "AP-ENABLED" })
+            }
+        });
+
+        // Lecture des erreurs entrantes
+        ls.stderr.on('data', (data) => {
+            console.error(data);
+        });
+
+        // Lors de la fermeture du process
+        ls.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
+        });
+    });
+
+});
+//#endregion
+
+//#region Socket.io
 io.on('connection', (socket) => {
     console.log("User connected");
     socket.on('keypressed', (data) => {
         socket.broadcast.emit('keypressed', data);
         console.log("Keypressed :", data);
-    })
+    });
+
+    socket.on('multi', (data) => {
+        //socket.broadcast.emit('multi', data);
+        console.log("Multi :", data);
+    });
 
     socket.on('playsound', (data) => {
         console.log("Joue le son " + data.number);
-    })
+    });
 });
+//#endregion
 
 app.listen(80, () => {
     console.log("Front listening on port 80");
