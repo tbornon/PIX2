@@ -61,7 +61,6 @@ var last = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 setInterval(() => {
     if (i == 10) i = 0;
     let bin = "" + ((i >> 3) & 1) + ((i >> 2) & 1) + ((i >> 1) & 1) + (i & 1);
-    //console.log("i = " + i + " : " + bin);
 
     A.writeSync(i & 1);
     B.writeSync((i >> 1) & 1);
@@ -69,17 +68,16 @@ setInterval(() => {
     D.writeSync((i >> 3) & 1);
 
     let val = input.readSync();
-    //console.log(i + ", valeur lue : " + val);
 
     if (val == 0 && last[i] == 1) {
         console.log("Touche " + i + " appuyée");
-        //socket.emit("keypressed", keys[i]);
+        socket.emit("keypressed", keys[i]);
     }
 
     last[i] = val;
 
     i++;
-}, 20);
+}, 10);
 
 process.on('SIGINT', function () {
     A.unexport();
