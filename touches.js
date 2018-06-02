@@ -1,4 +1,4 @@
-const GPIO = require('onoff').GPIO;
+const Gpio = require('onoff').Gpio;
 const io = require('socket.io-client');
 
 const A = new Gpio(19, 'out');
@@ -11,44 +11,44 @@ const socket = io('http://localhost:3000');
 
 const keys = [
     {
-        number: 0,
-        color: white
+        "number": 0,
+        "color": "white"
     },
     {
-        number: 1,
-        color: red
+        "number": 1,
+        "color": "red"
     },
     {
-        number: 2,
-        color: orange
+        "number": 2,
+        "color": "orange"
     },
     {
-        number: 3,
-        color: yellow
+        "number": 3,
+        "color": "yellow"
     },
     {
-        number: 4,
-        color: green
+        "number": 4,
+        "color": "green"
     },
     {
-        number: 5,
-        color: blue
+        "number": 5,
+        "color": "blue"
     },
     {
-        number: 6,
-        color: violet
+        "number": 6,
+        "color": "violet"
     },
     {
-        number: 7,
-        color: pink
+        "number": 7,
+        "color": "pink"
     },
     {
-        number: 8,
-        color: brown
+        "number": 8,
+        "color": "brown"
     },
     {
-        number: 9,
-        color: black
+        "number": 9,
+        "color": "black"
     },
 
 ]
@@ -73,7 +73,7 @@ setInterval(() => {
 
     if (val == 0 && last[i] == 1) {
         console.log("Touche " + i + " appuyée");
-        socket.emit("keypressed", keys[i]);
+        //socket.emit("keypressed", keys[i]);
     }
 
     last[i] = val;
