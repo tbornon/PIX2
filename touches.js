@@ -69,17 +69,17 @@ setInterval(() => {
     D.writeSync((i >> 3) & 1);
 
     let val = input.readSync();
-    console.log("Valeur lue : " + val);
+    console.log(i + ", valeur lue : " + val);
 
     if (val == 0 && last[i] == 1) {
-        console.log("Touche " + i + " appuyée");
+        //console.log("Touche " + i + " appuyée");
         //socket.emit("keypressed", keys[i]);
     }
 
     last[i] = val;
 
     i++;
-}, 100);
+}, 500);
 
 process.on('SIGINT', function () {
     A.unexport();
