@@ -19,7 +19,7 @@ fs.readFile('config.json', 'utf8', (err, data) => {
 
     config = JSON.parse(data);
 
-    mongoose.connect('mongodb://' + config.database.host  + '/pix');
+    mongoose.connect('mongodb://' + config.database.host + '/pix');
     db = mongoose.connection;
 
     db.on('error', console.error.bind(console, 'connection error:'))
@@ -32,6 +32,14 @@ fs.readFile('config.json', 'utf8', (err, data) => {
                 actualUser = res;
                 console.log("Main user successfuly loaded");
             } else console.log("No main user detected");
+
+            app.listen(80, () => {
+                console.log("Front listening on port 80");
+            });
+
+            http.listen(3000, () => {
+                console.log("Server started listening on port 3000");
+            });
         });
     });
 });
@@ -314,14 +322,6 @@ io.on('connection', (socket) => {
     });
 });
 //#endregion
-
-app.listen(80, () => {
-    console.log("Front listening on port 80");
-});
-
-http.listen(3000, () => {
-    console.log("Server started listening on port 3000");
-});
 
 function isUserComplete() {
     if (actualUser == null) return false;
