@@ -1,19 +1,24 @@
 const http = require('http').createServer();
+const httpMulti = require('http').createServer();
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const io = require('socket.io')(http);
+const ioMulti = require('socket.io')(httpMulti);
+const ioClient = require('socket.io-client');
 const User = require('./models/User');
 const Score = require('./models/Score');
 const fs = require('fs');
 const wifi = require('node-wifi');
+const os = require('os');
 const { spawn } = require('child_process');
 
 var actualUser;
 var db;
 var config;
 var wifi_AP;
+var socketClient;
 
 wifi.init({
     iface: null // network interface, choose a random wifi interface if set to null
@@ -43,7 +48,7 @@ fs.readFile('config.json', 'utf8', (err, data) => {
             });
 
             http.listen(3000, () => {
-                console.log("Server started listening on port 3000");
+                console.log("Socket io started listening on port 3000");
             });
         });
     });
@@ -288,7 +293,14 @@ rsn_pairwise=CCMP`;
         wifi_AP.stdout.on('data', (data) => {
             if (data.indexOf("AP-ENABLED") !== -1) {
                 console.log("AP point created successfuly");
-                io.sockets.emit('multi', { msg: "AP-ENABLED" })
+                io.sockets.emit('multi', { msg: "AP-ENABLED" });
+
+                if (!httpMulti.listening) {
+                    httpMulti.listen(3001, () => {
+                        console.log("Socket io multi started listening on port 3001");
+                        io.sockets.emit('multi', { msg: "SOCKET-ENABLED" });
+                    });
+                }
             }
         });
 
@@ -328,16 +340,22 @@ io.on('connection', (socket) => {
 
         // Si on cherche une partie multi
         if (data.msg == "LOOKING_FOR_PLAYER") {
+            // Scan les réseaux wifi
             wifi.scan(function (err, networks) {
                 if (err) {
                     console.error(err);
                 } else {
                     for (var i = 0; i < networks.length; i++) {
+                        // Si un des réseaux est un piano magique
                         if (networks[i].ssid.indexOf('[PIX2]') !== -1) {
+                            // On se connecte au réseau
                             wifi.connect({ ssid: networks[i].ssid, password: 'testtest' }, (err) => {
                                 if (err) console.error(err);
                                 console.log("Connected");
+                                // On envoie un message sur la page web informant qu'on est connecté
                                 socket.emit('multi', { msg: 'CONNECTED' });
+
+                                socketClient = ioClient('http://192.168.2.1:3001');
                             });
                         }
                     }
@@ -349,6 +367,10 @@ io.on('connection', (socket) => {
     socket.on('playsound', (data) => {
         console.log("Joue le son " + data.number);
     });
+});
+
+ioMulti.on('connection', (data) => {
+    console.log("User connected on multi websocket");
 });
 //#endregion
 
