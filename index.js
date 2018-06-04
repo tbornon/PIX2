@@ -7,12 +7,17 @@ const io = require('socket.io')(http);
 const User = require('./models/User');
 const Score = require('./models/Score');
 const fs = require('fs');
+const wifi = require('node-wifi');
 const { spawn } = require('child_process');
 
 var actualUser;
 var db;
 var config;
 var wifi_AP;
+
+wifi.init({
+    iface: null // network interface, choose a random wifi interface if set to null
+});
 
 fs.readFile('config.json', 'utf8', (err, data) => {
     if (err) console.error(err);
@@ -301,6 +306,25 @@ app.get('/api/stopMulti', (req, res) => {
         console.log("Wifi AP killed");
     });
     res.send('ok');
+});
+
+app.get('/api/findMulti', (req, res) => {
+    wifi.scan(function (err, networks) {
+        if (err) {
+            console.log(err);
+        } else {
+            for (var i = 0; i < networks.length; i++) {
+                if (networks[i].ssid.indexOf('[PIX2]') !== -1) {
+                    console.log(networks[i]);
+
+                    wifi.connect({ ssid: networks[i].ssid, password: 'testtest' }, (err) => {
+                        if (err) console.error(err);
+                        console.log("Connected")
+                    })
+                }
+            }
+        }
+    });
 });
 //#endregion
 

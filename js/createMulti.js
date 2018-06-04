@@ -21,16 +21,13 @@ $(document).ready(function () {
     });
 
     $('.return').on('click', function () {
-        document.location.href = "/";
-    });
-});
-
-$(document).unload(function () {
-    $.ajax({
-        url: '/api/stopMulti',
-        success: function (data) {
-            if (data != 'ok') console.error('Invalid answer from server'); 
-        }
+        $.ajax({
+            url: '/api/stopMulti',
+            success: function (data) {
+                if (data != 'ok') console.error('Invalid answer from server');
+                document.location.href = "/";
+            }
+        });
     });
 });
 
