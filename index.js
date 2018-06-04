@@ -143,7 +143,12 @@ app.get('/calculs/*', (req, res) => {
 });
 
 app.get('/ping', (req, res) => {
-    console.log(req.hostname);
+    console.log(req.connection.remoteAddress);
+    res.send('pong');
+});
+
+app.get('/ping/:ip:', (req, res) => {
+    console.log(req.params.ip);
     res.send('pong');
 });
 //#endregion
@@ -307,25 +312,6 @@ app.get('/api/stopMulti', (req, res) => {
     });
     res.send('ok');
 });
-
-app.get('/api/findMulti', (req, res) => {
-    wifi.scan(function (err, networks) {
-        if (err) {
-            console.log(err);
-        } else {
-            for (var i = 0; i < networks.length; i++) {
-                if (networks[i].ssid.indexOf('[PIX2]') !== -1) {
-                    console.log(networks[i]);
-
-                    wifi.connect({ ssid: networks[i].ssid, password: 'testtest' }, (err) => {
-                        if (err) console.error(err);
-                        console.log("Connected")
-                    })
-                }
-            }
-        }
-    });
-});
 //#endregion
 
 //#region Socket.io
@@ -337,8 +323,27 @@ io.on('connection', (socket) => {
     });
 
     socket.on('multi', (data) => {
-        //socket.broadcast.emit('multi', data);
+        // Affiche les données reçues
         console.log("Multi :", data);
+
+        // Si on cherche une partie multi
+        if (data.msg == "LOOKING_FOR_PLAYER") {
+            wifi.scan(function (err, networks) {
+                if (err) {
+                    console.error(err);
+                } else {
+                    for (var i = 0; i < networks.length; i++) {
+                        if (networks[i].ssid.indexOf('[PIX2]') !== -1) {
+                            wifi.connect({ ssid: networks[i].ssid, password: 'testtest' }, (err) => {
+                                if (err) console.error(err);
+                                console.log("Connected");
+                                socket.emit('multi', { msg: 'CONNECTED' });
+                            });
+                        }
+                    }
+                }
+            });
+        }
     });
 
     socket.on('playsound', (data) => {
