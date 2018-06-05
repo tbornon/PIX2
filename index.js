@@ -406,26 +406,27 @@ io.on('connection', (socket) => {
     });
 });
 
-ioMulti.on('connection', (socket) => {
+ioMulti.on('connection', (socketMulti) => {
     console.log("User connected on multi websocket");
 
-    socket.on('player_info', (data) => {
+    socketMulti.on('player_info', (data) => {
         console.log("player_info");
-        socket.emit('player_info', actualUser);
+        socketMulti.emit('player_info', actualUser);
     });
 
-    socket.on('simon', (data) => {
-        ioMulti.sockets.emit('simon', data);
+    socketMulti.on('simon', (data) => {
+        console.log(data);
+        socketMulti.broadcast.emit('simon', data);
     });
 
-    socket.on('highscores', (data) => {
+    socketMulti.on('highscores', (data) => {
         console.log("highscore");
         data.forEach(highscore => {
-
         });
+        
         Score.find({ "userId": actualUser._id }, (err, data) => {
             if (err) console.error(err);
-            socket.emit('highscores', data);
+            socketMulti.emit('highscores', data);
 
             partieMulti = true;
 
