@@ -356,6 +356,25 @@ io.on('connection', (socket) => {
                                 socket.emit('multi', { msg: 'CONNECTED' });
 
                                 socketClient = ioClient('http://192.168.2.1:3001');
+
+                                socketClient.on('connect', () => {
+                                    socketClient.emit('player_info', actualUser);
+                                });
+
+                                socketClient.on('player_info', (data) => {
+                                    console.log("player_info : " + data);
+                                    Score.find({"userId": actualUser._id}, (err, data) => {
+                                        if(err) console.error(err);
+
+                                        socketClient.emit('highscores', data);
+                                    })
+                                });
+
+                                socketClient.on('highscores', (data) => {
+                                    data.forEach(highscore => {
+                                        console.log(highscore);
+                                    });
+                                });
                             });
                         }
                     }
@@ -369,8 +388,23 @@ io.on('connection', (socket) => {
     });
 });
 
-ioMulti.on('connection', (data) => {
+ioMulti.on('connection', (socket) => {
     console.log("User connected on multi websocket");
+
+    socket.on('player_info', (data) => {
+        console.log("player_info : " + data);
+        socket.emit('player_info', actualUser);
+    });
+
+    socket.on('highscores', (data) => {
+        data.forEach(highscore => {
+            console.log(highscore);
+        });
+        Score.find({"userId": actualUser._id}, (err, data) => {
+            if(err) console.error(err);
+            socket.emit('highscores', data);
+        });
+    });
 });
 //#endregion
 
