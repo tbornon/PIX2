@@ -20,7 +20,7 @@ var db;
 var config;
 var wifi_AP;
 var socketClient;
-var partieMulti = false;
+var connected = false;
 
 wifi.init({
     iface: null // network interface, choose a random wifi interface if set to null
@@ -107,6 +107,7 @@ app.get('/config/pseudo', (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/menu.html');
+    connected = false;
 });
 
 app.get('/parametres', (req, res) => {
@@ -360,36 +361,39 @@ io.on('connection', (socket) => {
                         // Si un des réseaux est un piano magique
                         if (networks[i].ssid.indexOf('[PIX2]') !== -1) {
                             // On se connecte au réseau
-                            wifi.connect({ ssid: networks[i].ssid, password: 'testtest' }, (err) => {
-                                if (err) console.error(err);
-                                console.log("Connected");
-                                // On envoie un message sur la page web informant qu'on est connecté
-                                socket.emit('multi', { msg: 'CONNECTED' });
+                            if (!connected) {
+                                connected = true;
+                                wifi.connect({ ssid: networks[i].ssid, password: 'testtest' }, (err) => {
+                                    if (err) console.error(err);
+                                    console.log("Connected");
+                                    // On envoie un message sur la page web informant qu'on est connecté
+                                    socket.emit('multi', { msg: 'CONNECTED' });
 
-                                socketClient = ioClient('http://192.168.2.1:3001');
+                                    socketClient = ioClient('http://192.168.2.1:3001');
 
-                                socketClient.on('connect', () => {
-                                    socketClient.emit('player_info', actualUser);
-                                });
-
-                                socketClient.on('player_info', (data) => {
-                                    console.log("player_info");
-                                    Score.find({ "userId": actualUser._id }, (err, data) => {
-                                        if (err) console.error(err);
-
-                                        socketClient.emit('highscores', data);
-                                    })
-                                });
-
-                                socketClient.on('highscores', (data) => {
-                                    data.forEach(highscore => {
-                                        //console.log(highscore);
+                                    socketClient.on('connect', () => {
+                                        socketClient.emit('player_info', actualUser);
                                     });
-                                    console.log("highscore");
-                                    partieMulti = true;
-                                    socket.emit('multi', {msg: 'START_SIMON'});
+
+                                    socketClient.on('player_info', (data) => {
+                                        console.log("player_info");
+                                        Score.find({ "userId": actualUser._id }, (err, data) => {
+                                            if (err) console.error(err);
+
+                                            socketClient.emit('highscores', data);
+                                        })
+                                    });
+
+                                    socketClient.on('highscores', (data) => {
+                                        data.forEach(highscore => {
+                                            //console.log(highscore);
+                                        });
+                                        console.log("highscore");
+                                        partieMulti = true;
+                                        socket.emit('multi', { msg: 'START_SIMON' });
+                                    });
                                 });
-                            });
+                            }
                         }
                     }
                 }
@@ -417,7 +421,7 @@ ioMulti.on('connection', (socket) => {
     socket.on('highscores', (data) => {
         console.log("highscore");
         data.forEach(highscore => {
-            
+
         });
         Score.find({ "userId": actualUser._id }, (err, data) => {
             if (err) console.error(err);
@@ -425,7 +429,7 @@ ioMulti.on('connection', (socket) => {
 
             partieMulti = true;
 
-            io.sockets.emit('multi', {msg: "START_SIMON"});
+            io.sockets.emit('multi', { msg: "START_SIMON" });
         });
     });
 });
