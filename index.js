@@ -373,7 +373,7 @@ io.on('connection', (socket) => {
                                 });
 
                                 socketClient.on('player_info', (data) => {
-                                    console.log("player_info : " + data);
+                                    console.log("player_info");
                                     Score.find({ "userId": actualUser._id }, (err, data) => {
                                         if (err) console.error(err);
 
@@ -385,7 +385,7 @@ io.on('connection', (socket) => {
                                     data.forEach(highscore => {
                                         //console.log(highscore);
                                     });
-
+                                    console.log("highscore");
                                     partieMulti = true;
                                     socket.emit('multi', {msg: 'START_SIMON'});
                                 });
@@ -406,7 +406,7 @@ ioMulti.on('connection', (socket) => {
     console.log("User connected on multi websocket");
 
     socket.on('player_info', (data) => {
-        console.log("player_info : " + data);
+        console.log("player_info");
         socket.emit('player_info', actualUser);
     });
 
@@ -415,8 +415,9 @@ ioMulti.on('connection', (socket) => {
     });
 
     socket.on('highscores', (data) => {
+        console.log("highscore");
         data.forEach(highscore => {
-            console.log(highscore);
+            
         });
         Score.find({ "userId": actualUser._id }, (err, data) => {
             if (err) console.error(err);

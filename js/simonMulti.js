@@ -52,22 +52,6 @@ $(document).ready(function () {
         }
     })
 
-    socketMulti.on('simon', function (data) {
-        console.log(data);
-        if (data.msg == "READY" && data.number == 1) {
-            socketMulti.emit('simon', { msg: "READY", number: playerNumber });
-        }
-
-        else if (data.msg == "READY" && data.number == 2) {
-            jouer();
-        }
-
-        else if(data.msg == "YOUR_TURN") {
-            couleursAleatoires = data.couleurs;
-            jouer();
-        }
-    });
-
     // focntion éxécutée lorsque le serveur envoie un message de type "keypressed"
     socket.on('keypressed', function (data) {
         // on affiche les données reçues par le serveur
@@ -125,6 +109,22 @@ function handshake() {
             socketMulti.emit('simon', { msg: "READY", number: playerNumber });
         }, 500);
     }
+
+    socketMulti.on('simon', function (data) {
+        console.log(data);
+        if (data.msg == "READY" && data.number == 1) {
+            socketMulti.emit('simon', { msg: "READY", number: playerNumber });
+        }
+
+        else if (data.msg == "READY" && data.number == 2) {
+            jouer();
+        }
+
+        else if(data.msg == "YOUR_TURN") {
+            couleursAleatoires = data.couleurs;
+            jouer();
+        }
+    });
 }
 
 function jouer() {
