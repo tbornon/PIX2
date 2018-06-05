@@ -18,10 +18,9 @@ $(document).ready(function () {
             console.log("Connected to a player");
             waiting("Connexion à l'adversaire")
             clearInterval(lookingForPlayerTimer);
-
-            $.ajax({
-
-            });
+        }
+        else if(data.msg == "START_SIMON") {
+            document.location.href = '/simonMulti';
         }
     });
 

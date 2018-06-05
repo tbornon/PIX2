@@ -20,6 +20,7 @@ var db;
 var config;
 var wifi_AP;
 var socketClient;
+var partieMulti = false;
 
 wifi.init({
     iface: null // network interface, choose a random wifi interface if set to null
@@ -74,7 +75,7 @@ app.all('(?!*api)*', (req, res, next) => {
         res.end();
     } else
         next();
-})
+});
 
 //#region WEB
 app.get('/config/welcome', (req, res) => {
@@ -140,6 +141,10 @@ app.get('/simon/*', (req, res) => {
     res.sendFile(__dirname + '/jeux/simon.html');
 });
 
+app.get('/simonMulti/', (req, res) => {
+    res.sendFile(__dirname + '/jeux/simonMulti.html');
+});
+
 app.get('/couleur/*', (req, res) => {
     res.sendFile(__dirname + '/jeux/couleur.html');
 });
@@ -169,7 +174,7 @@ app.post('/api/color', (req, res) => {
             throw err;
         }
         else res.send('ok');
-    })
+    });
 });
 
 app.get('/api/color', (req, res) => {
@@ -187,7 +192,7 @@ app.post('/api/avatar', (req, res) => {
         } else {
             res.send("ok");
         }
-    })
+    });
 });
 
 app.get('/api/avatar', (req, res) => {
@@ -260,6 +265,10 @@ app.get('/api/user', (req, res) => {
             res.json(data);
         }
     })
+});
+
+app.get('/api/arch', (req, res) => {
+    res.send(config.arch);
 });
 
 app.get('/api/startMulti/', (req, res) => {
@@ -374,8 +383,11 @@ io.on('connection', (socket) => {
 
                                 socketClient.on('highscores', (data) => {
                                     data.forEach(highscore => {
-                                        console.log(highscore);
+                                        //console.log(highscore);
                                     });
+
+                                    partieMulti = true;
+                                    socket.emit('multi', {msg: 'START_SIMON'});
                                 });
                             });
                         }
@@ -398,6 +410,10 @@ ioMulti.on('connection', (socket) => {
         socket.emit('player_info', actualUser);
     });
 
+    socket.on('simon', (data) => {
+        ioMulti.sockets.emit('simon', data);
+    });
+
     socket.on('highscores', (data) => {
         data.forEach(highscore => {
             console.log(highscore);
@@ -405,6 +421,10 @@ ioMulti.on('connection', (socket) => {
         Score.find({ "userId": actualUser._id }, (err, data) => {
             if (err) console.error(err);
             socket.emit('highscores', data);
+
+            partieMulti = true;
+
+            io.sockets.emit('multi', {msg: "START_SIMON"});
         });
     });
 });

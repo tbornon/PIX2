@@ -18,6 +18,9 @@ $(document).ready(function () {
             console.log("Serveur lancé");
             waiting("En attente d'un joueur");
         }
+        else if(data.msg == "START_SIMON") {
+            document.location.href = '/simonMulti';
+        }
     });
 
     $('.return').on('click', function () {
