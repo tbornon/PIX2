@@ -13,6 +13,7 @@ const fs = require('fs');
 const wifi = require('node-wifi');
 const os = require('os');
 const { spawn } = require('child_process');
+const { exec } = require('child_process');
 
 var actualUser;
 var db;
@@ -29,7 +30,7 @@ fs.readFile('config.json', 'utf8', (err, data) => {
 
     config = JSON.parse(data);
 
-    mongoose.connect('mongodb://' + config.database.host + '/pix');
+    mongoose.connect('mongodb://' + config.database.host + '/' + config.database.name);
     db = mongoose.connection;
 
     db.on('error', console.error.bind(console, 'connection error:'))
@@ -332,6 +333,7 @@ io.on('connection', (socket) => {
     socket.on('keypressed', (data) => {
         socket.broadcast.emit('keypressed', data);
         console.log("Keypressed :", data);
+        playSound(data.number);
     });
 
     socket.on('multi', (data) => {
@@ -363,8 +365,8 @@ io.on('connection', (socket) => {
 
                                 socketClient.on('player_info', (data) => {
                                     console.log("player_info : " + data);
-                                    Score.find({"userId": actualUser._id}, (err, data) => {
-                                        if(err) console.error(err);
+                                    Score.find({ "userId": actualUser._id }, (err, data) => {
+                                        if (err) console.error(err);
 
                                         socketClient.emit('highscores', data);
                                     })
@@ -400,8 +402,8 @@ ioMulti.on('connection', (socket) => {
         data.forEach(highscore => {
             console.log(highscore);
         });
-        Score.find({"userId": actualUser._id}, (err, data) => {
-            if(err) console.error(err);
+        Score.find({ "userId": actualUser._id }, (err, data) => {
+            if (err) console.error(err);
             socket.emit('highscores', data);
         });
     });
@@ -413,4 +415,48 @@ function isUserComplete() {
     else if (actualUser.color == null) return false;
     else if (actualUser.avatar.seed == null) return false;
     else return true;
+}
+
+function playSound(number) {
+    if (config.arch == "raspberry") {
+        let file = "./res/";
+        switch (number) {
+            case 0:
+                file += "Do_1.mp3";
+                break;
+            case 1:
+                file += "Re_1.mp3";
+                break;
+            case 2:
+                file += "Mi_1.mp3";
+                break;
+            case 3:
+                file += "Fa_1.mp3";
+                break;
+            case 4:
+                file += "Sol_1.mp3";
+                break;
+            case 5:
+                file += "La_1.mp3";
+                break;
+            case 6:
+                file += "Si_1.mp3";
+                break;
+            case 7:
+                file += "Do_2.mp3";
+                break;
+            case 8:
+                file += "Re_2.mp3";
+                break;
+            case 9:
+                file += "Mi_2.mp3";
+                break;
+        }
+
+        console.log("Joue le son : " + file);
+        exec('omxplayer', [file], (err, stdout, stderr) => {
+            if (err) console.error(err);
+            console.log("Sound played");
+        });
+    }
 }
