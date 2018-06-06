@@ -32,7 +32,15 @@ $(document).ready(function () {
     // Se connecte au serveur
 
     var socket = io('http://localhost:3000');
-    handshake();
+
+    $.ajax({
+        url: '/api/arch',
+        success: function (data) {
+            if (data == "raspberry") playerNumber = 1;
+            else playerNumber = 2;
+            handshake();
+        }
+    })
 
     // focntion éxécutée lorsque le serveur envoie un message de type "keypressed"
     socket.on('keypressed', function (data) {
