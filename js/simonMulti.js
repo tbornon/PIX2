@@ -26,12 +26,13 @@ var indexJoueur = 0;
 var bestScore;
 var bestScoreUser;
 var playerNumber;
+var socket;
 
 // La fonction s'éxécute lorsque la page est chargée
 $(document).ready(function () {
     // Se connecte au serveur
 
-    var socket = io('http://localhost:3000');
+    socket = io('http://localhost:3000');
 
     $.ajax({
         url: '/api/arch',
