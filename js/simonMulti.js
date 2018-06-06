@@ -75,7 +75,7 @@ $(document).ready(function () {
     });
 
     socket.on('simon', function (data) {
-        console.log("Simon data : " + data);
+        console.log("Simon data : ", data);
         if (data.msg == "READY" && data.number == 1 && !readySignalReceived) {
             console.log("Ready signal received from player 1");
             readySignalReceived = true;
@@ -84,6 +84,7 @@ $(document).ready(function () {
 
         else if (data.msg == "READY" && data.number == 2 && !readySignalReceived) {
             console.log("Ready signal received from player 2");
+            clearInterval(waitingForPlayerTimer);
             readySignalReceived = true;
             jouer();
         }
@@ -114,7 +115,7 @@ function handshake() {
     if (playerNumber == 1) {
         waitingForPlayerTimer = setInterval(function () {
             console.log("Sending ready signal");
-            socket.emit('simon', { msg: "READY", number: playerNumber });
+            socket.emit('simon', { msg: "READY", number: 1 });
         }, 500);
     }
 

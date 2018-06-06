@@ -380,7 +380,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('simon', (data) => {
-        console.log('Simon data received from web : ' + data);
+        console.log('Simon data received from web : ', data);
         if (socketClient != null) {
             console.log("Sending to rpi");
             socketClient.emit('simon', data);
@@ -415,7 +415,7 @@ ioMulti.on('connection', (socketMulti) => {
     });
 
     socketMulti.on('simon', (data) => {
-        console.log("Simon data received on multi webscoket " + data);
+        console.log("Simon data received on multi webscoket ", data);
         io.sockets.emit('simon', data);
     });
 });
@@ -499,7 +499,7 @@ function connectToAdv() {
     });
 
     socketClient.on('simon', (data) => {
-        console.log("Simon data received from multi websocket " + data);
+        console.log("Simon data received from multi websocket ", data);
         if (data.msg == "READY" && data.number == 1) {
             //socketClient.emit('simon', { msg: "READY", number: "2" });
             io.sockets.emit('simon', data);
