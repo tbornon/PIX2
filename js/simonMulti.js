@@ -1,5 +1,3 @@
-import { read } from "fs";
-
 // liste avec les noms des couleurs
 var listeCouleur = ["green", "red", "yellow", "blue"];
 // liste des couleurs que le joueur doit retenir
