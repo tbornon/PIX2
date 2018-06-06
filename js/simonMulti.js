@@ -65,6 +65,7 @@ $(document).ready(function () {
             if (indexJoueur == couleursAleatoires.length) {
                 // on remet l'index a 0
                 indexJoueur = 0;
+                console.log("Toutes les couleurs ont été saisies correctement, envoie d'une notification à l'adversaire");
                 // on génère une nouvelle couleur et on affiche la séquence de couleurs
                 socket.emit('simon', { msg: "YOUR_TURN", couleurs: couleursAleatoires });
             }

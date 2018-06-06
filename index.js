@@ -369,29 +369,7 @@ io.on('connection', (socket) => {
                                     // On envoie un message sur la page web informant qu'on est connecté
                                     socket.emit('multi', { msg: 'CONNECTED' });
 
-                                    socketClient = ioClient('http://192.168.2.1:3001');
 
-                                    socketClient.on('connect', () => {
-                                        socketClient.emit('player_info', actualUser);
-                                    });
-
-                                    socketClient.on('player_info', (data) => {
-                                        console.log("player_info");
-                                        Score.find({ "userId": actualUser._id }, (err, data) => {
-                                            if (err) console.error(err);
-
-                                            socketClient.emit('highscores', data);
-                                        })
-                                    });
-
-                                    socketClient.on('highscores', (data) => {
-                                        data.forEach(highscore => {
-                                            //console.log(highscore);
-                                        });
-                                        console.log("highscore");
-                                        partieMulti = true;
-                                        socket.emit('multi', { msg: 'START_SIMON' });
-                                    });
                                 });
                             }
                         }
@@ -400,10 +378,16 @@ io.on('connection', (socket) => {
             });
         }
     });
-    
+
     socket.on('simon', (data) => {
-        console.log(data);
-        ioMulti.sockets.emit('simon', data);
+        console.log('Simon data received from web : ' + data);
+        if (socketClient != null) {
+            console.log("Sending to rpi");
+            socketClient.emit('simon', data);
+        } else {
+            console.log("Sending to windows");
+            ioMulti.sockets.emit('simon', data);
+        }
     });
 });
 
@@ -415,16 +399,11 @@ ioMulti.on('connection', (socketMulti) => {
         socketMulti.emit('player_info', actualUser);
     });
 
-    socketMulti.on('simon', (data) => {
-        console.log(data);
-        io.sockets.emit('simon', data);
-    });
-
     socketMulti.on('highscores', (data) => {
         console.log("highscore");
         data.forEach(highscore => {
         });
-        
+
         Score.find({ "userId": actualUser._id }, (err, data) => {
             if (err) console.error(err);
             socketMulti.emit('highscores', data);
@@ -433,6 +412,11 @@ ioMulti.on('connection', (socketMulti) => {
 
             io.sockets.emit('multi', { msg: "START_SIMON" });
         });
+    });
+
+    socketMulti.on('simon', (data) => {
+        console.log("Simon data received on multi webscoket " + data);
+        io.sockets.emit('simon', data);
     });
 });
 //#endregion
@@ -486,4 +470,39 @@ function playSound(number) {
             console.log("Sound played");
         });
     }
+}
+
+function connectToAdv() {
+    socketClient = ioClient('http://192.168.2.1:3001');
+
+    socketClient.on('connect', () => {
+        console.log("Client socket connected to 192.168.2.1:3001");
+        socketClient.emit('player_info', actualUser);
+    });
+
+    socketClient.on('player_info', (data) => {
+        console.log("player_info");
+        Score.find({ "userId": actualUser._id }, (err, data) => {
+            if (err) console.error(err);
+
+            socketClient.emit('highscores', data);
+        })
+    });
+
+    socketClient.on('highscores', (data) => {
+        data.forEach(highscore => {
+            //console.log(highscore);
+        });
+        console.log("highscore");
+        partieMulti = true;
+        socket.emit('multi', { msg: 'START_SIMON' });
+    });
+
+    socketClient.on('simon', (data) => {
+        console.log("Simon data received from multi websocket " + data);
+        if (data.msg == "READY" && data.number == 1) {
+            //socketClient.emit('simon', { msg: "READY", number: "2" });
+            io.sockets.emit('simon', data);
+        }
+    });
 }
