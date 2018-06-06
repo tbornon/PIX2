@@ -25,7 +25,6 @@ var indexJoueur = 0;
 
 var bestScore;
 var bestScoreUser;
-var socketMulti;
 var playerNumber;
 
 // La fonction s'éxécute lorsque la page est chargée
@@ -33,20 +32,7 @@ $(document).ready(function () {
     // Se connecte au serveur
 
     var socket = io('http://localhost:3000');
-
-    $.ajax({
-        url: '/api/arch',
-        success: function (data) {
-            if (data == "raspberry") {
-                socketMulti = io('http://localhost:3001');
-                playerNumber = 1;
-            } else {
-                socketMulti = io('http://192.168.2.1:3001');
-                playerNumber = 2;
-            }
-            handshake();
-        }
-    })
+    handshake();
 
     // focntion éxécutée lorsque le serveur envoie un message de type "keypressed"
     socket.on('keypressed', function (data) {
@@ -71,8 +57,27 @@ $(document).ready(function () {
                 // on remet l'index a 0
                 indexJoueur = 0;
                 // on génère une nouvelle couleur et on affiche la séquence de couleurs
-                socketMulti.emit('simon', { msg: "YOUR_TURN", couleurs: couleursAleatoires });
+                socket.emit('simon', { msg: "YOUR_TURN", couleurs: couleursAleatoires });
             }
+        }
+    });
+
+    socket.on('simon', function (data) {
+        console.log("Simon data : " + data);
+        if (data.msg == "READY" && data.number == 1) {
+            console.log("Ready signal received from player 1");
+            socket.emit('simon', { msg: "READY", number: playerNumber });
+        }
+
+        else if (data.msg == "READY" && data.number == 2) {
+            console.log("Ready signal received from player 2");
+            jouer();
+        }
+
+        else if (data.msg == "YOUR_TURN") {
+            console.log("Your turn signal received");
+            couleursAleatoires = data.couleurs;
+            jouer();
         }
     });
 
@@ -95,28 +100,11 @@ function handshake() {
     if (playerNumber == 1) {
         waitingForPlayerTimer = setInterval(function () {
             console.log("Sending ready signal");
-            socketMulti.emit('simon', { msg: "READY", number: playerNumber });
+            socket.emit('simon', { msg: "READY", number: playerNumber });
         }, 500);
     }
 
-    socketMulti.on('simon', function (data) {
-        console.log("Simon data : " + data);
-        if (data.msg == "READY" && data.number == 1) {
-            console.log("Ready signal received from player 1");
-            socketMulti.emit('simon', { msg: "READY", number: playerNumber });
-        }
 
-        else if (data.msg == "READY" && data.number == 2) {
-            console.log("Ready signal received from player 2");
-            jouer();
-        }
-
-        else if(data.msg == "YOUR_TURN") {
-            console.log("Your turn signal received");
-            couleursAleatoires = data.couleurs;
-            jouer();
-        }
-    });
 }
 
 function jouer() {
@@ -130,7 +118,7 @@ function jouer() {
 }
 
 function finPartie() {
-    socketMulti.emit('simon', { msg: "LOST", number: playerNumber });
+    socket.emit('simon', { msg: "LOST", number: playerNumber });
 }
 
 function afficherCouleurs(index) {

@@ -400,9 +400,9 @@ io.on('connection', (socket) => {
             });
         }
     });
-
-    socket.on('playsound', (data) => {
-        console.log("Joue le son " + data.number);
+    
+    socket.on('simon', (data) => {
+        console.log(data);
     });
 });
 
@@ -416,7 +416,7 @@ ioMulti.on('connection', (socketMulti) => {
 
     socketMulti.on('simon', (data) => {
         console.log(data);
-        socketMulti.broadcast.emit('simon', data);
+        io.sockets.emit('simon', data);
     });
 
     socketMulti.on('highscores', (data) => {
