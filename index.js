@@ -403,6 +403,7 @@ io.on('connection', (socket) => {
     
     socket.on('simon', (data) => {
         console.log(data);
+        ioMulti.sockets.emit('simon', data);
     });
 });
 

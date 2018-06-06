@@ -32,7 +32,7 @@ var socket;
 $(document).ready(function () {
     // Se connecte au serveur
 
-    socket = io('http://localhost:3000');
+    socket = io('http://' + document.location.host + ':3000');
 
     $.ajax({
         url: '/api/arch',
