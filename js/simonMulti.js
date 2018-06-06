@@ -92,6 +92,7 @@ $(document).ready(function () {
         else if (data.msg == "YOUR_TURN") {
             console.log("Your turn signal received");
             couleursAleatoires = data.couleurs;
+            console.log(couleursAleatoires);
             jouer();
         }
     });

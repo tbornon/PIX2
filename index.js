@@ -500,9 +500,6 @@ function connectToAdv() {
 
     socketClient.on('simon', (data) => {
         console.log("Simon data received from multi websocket ", data);
-        if (data.msg == "READY" && data.number == 1) {
-            //socketClient.emit('simon', { msg: "READY", number: "2" });
-            io.sockets.emit('simon', data);
-        }
+        io.sockets.emit('simon', data);
     });
 }
