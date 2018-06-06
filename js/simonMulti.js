@@ -1,3 +1,5 @@
+import { read } from "fs";
+
 // liste avec les noms des couleurs
 var listeCouleur = ["green", "red", "yellow", "blue"];
 // liste des couleurs que le joueur doit retenir
@@ -12,6 +14,8 @@ var peutAppuyer = false;
 var perdu = false;
 // est ce que l'on est entrain d'afficher la séquence de couleurs à retenir
 var affichageEnCours = false;
+
+var readySignalReceived = false;
 
 // timer pour vérifier que le joueur n'attend pas trop longtemps avant de jouer
 var timer;
@@ -74,13 +78,15 @@ $(document).ready(function () {
 
     socket.on('simon', function (data) {
         console.log("Simon data : " + data);
-        if (data.msg == "READY" && data.number == 1) {
+        if (data.msg == "READY" && data.number == 1 && !readySignalReceived) {
             console.log("Ready signal received from player 1");
+            readySignalReceived = true;
             socket.emit('simon', { msg: "READY", number: playerNumber });
         }
 
-        else if (data.msg == "READY" && data.number == 2) {
+        else if (data.msg == "READY" && data.number == 2 && !readySignalReceived) {
             console.log("Ready signal received from player 2");
+            readySignalReceived = true;
             jouer();
         }
 

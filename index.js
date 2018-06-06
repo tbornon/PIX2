@@ -369,7 +369,7 @@ io.on('connection', (socket) => {
                                     // On envoie un message sur la page web informant qu'on est connecté
                                     socket.emit('multi', { msg: 'CONNECTED' });
 
-
+                                    connectToAdv();
                                 });
                             }
                         }
@@ -495,7 +495,7 @@ function connectToAdv() {
         });
         console.log("highscore");
         partieMulti = true;
-        socket.emit('multi', { msg: 'START_SIMON' });
+        io.sockets.emit('multi', { msg: 'START_SIMON' });
     });
 
     socketClient.on('simon', (data) => {
