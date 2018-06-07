@@ -465,7 +465,7 @@ function playSound(number) {
         }
 
         console.log("Joue le son : " + file);
-        exec('omxplayer', [file], (err, stdout, stderr) => {
+        exec('omxplayer ' + file, (err, stdout, stderr) => {
             if (err) console.error(err);
             console.log("Sound played");
         });

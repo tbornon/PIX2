@@ -36,6 +36,8 @@ $(document).ready(function () {
 
     socket = io('http://' + document.location.host + ':3000');
 
+    $("#waiting").hide();
+
     $.ajax({
         url: '/api/arch',
         success: function (data) {
