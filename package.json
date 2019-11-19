@@ -11,7 +11,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "mongoose": "^5.0.4",
+    "mongoose": "^5.7.5",
     "node-wifi": "^2.0.4",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.1.1",
